@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>اختبار تحديد مستوى اللغة الإنجليزية | CEFR Placement Test</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Cairo', 'Inter', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top right, #e0e7ff 0%, #f8fafc 45%, #dcfce7 100%);
+      min-height: 100vh;
+    }
+    .font-en {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      direction: ltr;
+      text-align: left;
+    }
+
+    /* Animations & Motion */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(16px) scale(0.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.94) translateY(8px); }
+      70% { transform: scale(1.015) translateY(-1px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes stripeMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 40px 0; }
+    }
+    @keyframes pulseBar {
+      0%, 100% { transform: scaleY(0.35); }
+      50% { transform: scaleY(1); }
+    }
+
+    .animate-fade-slide {
+      animation: fadeSlideUp 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .animate-pop {
+      animation: popIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    }
+    .animate-float {
+      animation: floatSlow 3.5s ease-in-out infinite;
+    }
+
+    .progress-striped {
+      background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.22) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.22) 50%,
+        rgba(255, 255, 255, 0.22) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: 40px 40px;
+      animation: stripeMove 1.4s linear infinite;
+    }
+
+    /* Tactile Interactive Cards & Buttons */
+    .tactile-btn {
+      transition: transform 0.14s ease, box-shadow 0.14s ease, background-color 0.15s ease;
+    }
+    .tactile-btn:active {
+      transform: translateY(2px);
+    }
+
+    .option-card {
+      transition: all 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .option-card:hover {
+      transform: translateY(-3px);
+      border-color: #a5b4fc;
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.12);
+    }
+    .option-selected {
+      border-color: #4f46e5 !important;
+      background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%) !important;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2), 0 8px 18px rgba(79, 70, 229, 0.12);
+      transform: translateY(-2px);
+    }
+    .option-selected .opt-letter {
+      background-color: #4f46e5 !important;
+      color: #ffffff !important;
+    }
+
+    .mode-card {
+      transition: all 0.2s ease;
+    }
+    .mode-card-active {
+      border-color: #4f46e5 !important;
+      background-color: #eef2ff !important;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.16);
+    }
+
+    .level-pill-active {
+      background-color: #4f46e5 !important;
+      color: #ffffff !important;
+      border-color: #4338ca !important;
+      transform: scale(1.04);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    }
+
+    .wave-bar {
+      transform-origin: bottom;
+      animation: pulseBar 0.8s ease-in-out infinite;
+    }
+    .wave-paused .wave-bar {
+      animation-play-state: paused;
+      transform: scaleY(0.35);
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #ffffff !important; }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased">
+
+  <!-- Top Navigation Bar -->
+  <header class="bg-white/85 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-30 no-print">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 text-white flex items-center justify-center font-en font-extrabold text-base shadow-md shadow-indigo-500/25">
+          EN
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-extrabold text-slate-900 leading-tight">اختبار تحديد المستوى (CEFR)</h1>
+          <p class="text-xs text-slate-500">تقييم تفاعلي ذكي لمهارات اللغة الإنجليزية</p>
+        </div>
+      </div>
+      <div id="header-badge" class="hidden items-center gap-2 bg-indigo-50 border border-indigo-200/70 text-indigo-700 px-3.5 py-1.5 rounded-full text-xs font-bold">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="header-student-name"></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6 sm:py-9">
+
+    <!-- ==================== SCREEN 1: WELCOME ==================== -->
+    <section id="screen-welcome" class="animate-fade-slide bg-white rounded-3xl shadow-xl shadow-indigo-950/5 border border-slate-200/70 overflow-hidden">
+      <div class="relative bg-gradient-to-l from-indigo-600 via-violet-600 to-blue-600 text-white p-6 sm:p-9 overflow-hidden">
+        <!-- Decorative floating shapes -->
+        <div class="absolute -left-10 -top-10 w-40 h-40 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
+        <div class="absolute left-12 bottom-3 w-20 h-20 rounded-2xl bg-amber-300/15 rotate-12 pointer-events-none animate-float"></div>
+
+        <div class="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="space-y-2.5 max-w-2xl">
+            <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur px-3 py-1 rounded-full text-xs font-bold">
+              <span>المعيار الأوروبي المرجعي</span>
+              <span class="font-en bg-amber-400 text-slate-900 px-2 py-0.5 rounded-full font-extrabold">A1 – C1</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-black tracking-tight">اكتشف مستواك الحقيقي في الإنجليزية</h2>
+            <p class="text-indigo-100 text-sm sm:text-base leading-relaxed">
+              تحدّي تفاعلي بالصور والصوت والمواقف اليومية! يمكنك البدء بالاختبار الشامل من المستوى الأول <span class="font-en font-bold">A1</span> ليتدرج معك تلقائياً، أو اختيار مستوى محدد لاختبار نفسك فيه.
+            </p>
+          </div>
+          <div class="hidden sm:flex shrink-0 w-24 h-24 rounded-3xl bg-white/15 backdrop-blur border border-white/25 items-center justify-center animate-float">
+            <svg class="w-12 h-12 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-6 sm:p-9 space-y-7">
+        <!-- 4 Skill Pillars -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="bg-amber-50/70 border border-amber-200/70 rounded-2xl p-3.5 text-center transition hover:-translate-y-0.5">
+            <div class="w-9 h-9 mx-auto mb-2 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <p class="text-xs font-extrabold text-slate-800">المفردات والصور</p>
+            <p class="text-[11px] text-slate-500 font-en">Vocabulary</p>
+          </div>
+          <div class="bg-indigo-50/70 border border-indigo-200/70 rounded-2xl p-3.5 text-center transition hover:-translate-y-0.5">
+            <div class="w-9 h-9 mx-auto mb-2 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <p class="text-xs font-extrabold text-slate-800">القواعد والتراكيب</p>
+            <p class="text-[11px] text-slate-500 font-en">Grammar</p>
+          </div>
+          <div class="bg-emerald-50/70 border border-emerald-200/70 rounded-2xl p-3.5 text-center transition hover:-translate-y-0.5">
+            <div class="w-9 h-9 mx-auto mb-2 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            </div>
+            <p class="text-xs font-extrabold text-slate-800">الفهم القرائي</p>
+            <p class="text-[11px] text-slate-500 font-en">Reading</p>
+          </div>
+          <div class="bg-rose-50/70 border border-rose-200/70 rounded-2xl p-3.5 text-center transition hover:-translate-y-0.5">
+            <div class="w-9 h-9 mx-auto mb-2 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+            </div>
+            <p class="text-xs font-extrabold text-slate-800">الاستماع التفاعلي</p>
+            <p class="text-[11px] text-slate-500 font-en">Listening</p>
+          </div>
+        </div>
+
+        <!-- Student Registration & Mode Selector Form -->
+        <form id="start-form" class="bg-slate-50/90 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-6">
+          <div class="space-y-4">
+            <h3 class="text-base font-extrabold text-slate-900">1. بيانات الطالب</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="sm:col-span-2">
+                <label for="student-name" class="block text-xs font-bold text-slate-700 mb-1.5">الاسم الكامل</label>
+                <input id="student-name" type="text" placeholder="مثال: أحمد محمد علي"
+                  class="w-full px-4 py-3 rounded-2xl border-2 border-slate-200 bg-white focus:outline-none focus:border-indigo-500 text-slate-900 font-semibold transition" />
+              </div>
+              <div>
+                <label for="student-age" class="block text-xs font-bold text-slate-700 mb-1.5">العمر (بالسنوات)</label>
+                <input id="student-age" type="number" min="6" max="99" placeholder="مثال: 14"
+                  class="w-full px-4 py-3 rounded-2xl border-2 border-slate-200 bg-white focus:outline-none focus:border-indigo-500 text-slate-900 font-semibold transition" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Test Mode Selection -->
+          <div class="space-y-3">
+            <h3 class="text-base font-extrabold text-slate-900">2. طريقة الاختبار</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button id="mode-auto-btn" type="button"
+                class="mode-card mode-card-active text-right p-4 rounded-2xl border-2 border-slate-200 bg-white cursor-pointer flex items-start gap-3">
+                <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-extrabold text-slate-900">اختبار شامل تلقائي (موصى به)</p>
+                  <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">يبدأ معك من المستوى الأول <span class="font-en font-bold">A1</span> وتزيد الصعوبة تدريجياً لتحديد مستواك بدقة (15 سؤالاً).</p>
+                </div>
+              </button>
+
+              <button id="mode-manual-btn" type="button"
+                class="mode-card text-right p-4 rounded-2xl border-2 border-slate-200 bg-white cursor-pointer flex items-start gap-3">
+                <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-extrabold text-slate-900">تحديد مستوى معين يدوياً</p>
+                  <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">اختر مستوى محدداً (<span class="font-en font-bold">A1–C1</span>) لتظهر لك أسئلة خاصة بهذا المستوى فقط (6 أسئلة).</p>
+                </div>
+              </button>
+            </div>
+
+            <!-- Manual Level Picker (Hidden unless manual mode selected) -->
+            <div id="manual-level-box" class="hidden animate-fade-slide bg-white border border-indigo-200 rounded-2xl p-4 space-y-2.5">
+              <p class="text-xs font-bold text-slate-700">اختر المستوى المطلوب اختباره:</p>
+              <div class="grid grid-cols-5 gap-2 font-en">
+                <button type="button" data-level="A1" class="level-pill level-pill-active py-2.5 rounded-xl border-2 border-slate-200 bg-slate-50 font-extrabold text-sm cursor-pointer transition">A1</button>
+                <button type="button" data-level="A2" class="level-pill py-2.5 rounded-xl border-2 border-slate-200 bg-slate-50 font-extrabold text-sm cursor-pointer transition">A2</button>
+                <button type="button" data-level="B1" class="level-pill py-2.5 rounded-xl border-2 border-slate-200 bg-slate-50 font-extrabold text-sm cursor-pointer transition">B1</button>
+                <button type="button" data-level="B2" class="level-pill py-2.5 rounded-xl border-2 border-slate-200 bg-slate-50 font-extrabold text-sm cursor-pointer transition">B2</button>
+                <button type="button" data-level="C1" class="level-pill py-2.5 rounded-xl border-2 border-slate-200 bg-slate-50 font-extrabold text-sm cursor-pointer transition">C1</button>
+              </div>
+              <p id="manual-level-hint" class="text-xs text-indigo-700 font-semibold">المستوى المختار: A1 (Beginner - مبتدئ)</p>
+            </div>
+          </div>
+
+          <div id="form-error" class="hidden text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-4 py-2.5 font-bold"></div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
+            <div id="mode-summary-pill" class="inline-flex items-center gap-2 text-xs font-bold text-slate-600 bg-white px-3.5 py-2 rounded-xl border border-slate-200">
+              <svg class="w-4 h-4 text-indigo-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span id="mode-summary-text">15 سؤالاً متدرجاً من A1 • المدة 5–7 دقائق</span>
+            </div>
+            <button type="submit"
+              class="tactile-btn w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 border-b-4 border-indigo-800 text-white font-extrabold text-base shadow-lg shadow-indigo-600/25 cursor-pointer">
+              ابدأ الاختبار الآن &larr;
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 2: QUIZ ==================== -->
+    <section id="screen-quiz" class="hidden space-y-5">
+      <!-- Enhanced Progress Bar Card -->
+      <div class="bg-white rounded-3xl p-4 sm:p-5 shadow-md shadow-slate-200/50 border border-slate-200/80 space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span id="q-counter" class="text-sm sm:text-base font-extrabold text-slate-900">السؤال 1 من 15</span>
+            <span id="q-skill-badge" class="font-en text-xs font-bold px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100"></span>
+            <span id="q-tier-badge" class="font-en text-xs font-extrabold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200/70"></span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="q-remaining" class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/70"></span>
+            <span id="q-progress-pct" class="text-xs font-extrabold text-indigo-600 font-en bg-indigo-50 px-2 py-1 rounded-lg">7%</span>
+          </div>
+        </div>
+        <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200/60">
+          <div id="q-progress-bar" class="h-full bg-gradient-to-l from-indigo-500 via-violet-500 to-blue-500 progress-striped rounded-full transition-all duration-500 ease-out" style="width: 7%"></div>
+        </div>
+      </div>
+
+      <!-- Question Card -->
+      <div id="question-card" class="animate-fade-slide bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-200/70 p-5 sm:p-8 space-y-6">
+        <!-- Visual / Media Slot -->
+        <div id="q-visual-container" class="hidden rounded-2xl bg-slate-50 border border-slate-200/80 p-4 sm:p-5"></div>
+
+        <!-- Question Prompt -->
+        <div class="space-y-1.5">
+          <p id="q-instruction-ar" class="text-xs sm:text-sm font-bold text-indigo-600"></p>
+          <h3 id="q-prompt" class="font-en text-lg sm:text-xl font-extrabold text-slate-900 leading-relaxed"></h3>
+        </div>
+
+        <!-- Options -->
+        <div id="q-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 font-en"></div>
+
+        <div id="quiz-error" class="hidden text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-4 py-2.5 font-bold text-center">
+          من فضلك اختر إجابة قبل الانتقال للسؤال التالي.
+        </div>
+
+        <!-- Action Footer -->
+        <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+          <span class="text-xs text-slate-400">يمكنك استخدام مفاتيح <span class="font-en font-bold">1-4</span> للاختيار</span>
+          <button id="btn-next" type="button"
+            class="tactile-btn px-7 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 border-b-4 border-indigo-800 text-white font-extrabold text-sm sm:text-base shadow-md shadow-indigo-600/20 cursor-pointer">
+            السؤال التالي &larr;
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 3: RESULTS ==================== -->
+    <section id="screen-results" class="hidden space-y-6">
+      <!-- Sync Status Banner -->
+      <div id="sync-banner" class="animate-fade-slide rounded-2xl p-4 border flex flex-wrap items-center justify-between gap-3 no-print">
+        <div class="flex items-center gap-3">
+          <div id="sync-icon" class="w-8 h-8 rounded-full flex items-center justify-center shrink-0"></div>
+          <div>
+            <p id="sync-title" class="text-sm font-bold"></p>
+            <p id="sync-subtitle" class="text-xs opacity-80"></p>
+          </div>
+        </div>
+        <button id="btn-retry-sync" type="button" class="hidden px-4 py-1.5 rounded-lg bg-white border border-slate-300 text-xs font-bold hover:bg-slate-50 cursor-pointer">
+          إعادة المحاولة
+        </button>
+      </div>
+
+      <!-- Main Result Hero -->
+      <div class="animate-fade-slide bg-white rounded-3xl shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden">
+        <div class="bg-gradient-to-l from-slate-900 via-indigo-950 to-violet-900 text-white p-6 sm:p-9">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+            <div class="space-y-2">
+              <p id="res-mode-badge" class="inline-block text-xs font-bold bg-white/15 px-3 py-1 rounded-full text-amber-300"></p>
+              <h2 id="res-student-heading" class="text-2xl sm:text-3xl font-black"></h2>
+              <p id="res-level-desc" class="text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed"></p>
+            </div>
+            <div class="shrink-0 bg-white/10 backdrop-blur border border-white/25 rounded-3xl p-5 text-center min-w-[165px] animate-float">
+              <p id="res-box-label" class="text-xs text-indigo-200 font-bold mb-1">المستوى المحدد</p>
+              <div id="res-cefr-code" class="font-en text-5xl font-black tracking-tight text-white"></div>
+              <p id="res-cefr-title" class="font-en text-xs font-bold text-amber-300 mt-1"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-8 space-y-8">
+          <!-- KPI Strip -->
+          <div class="grid grid-cols-3 gap-3 sm:gap-4">
+            <div class="bg-indigo-50/60 rounded-2xl p-4 border border-indigo-200/60 text-center">
+              <p class="text-xs text-slate-600 font-bold mb-1">الدقة الكلية</p>
+              <p id="res-accuracy" class="font-en text-2xl font-black text-indigo-600"></p>
+            </div>
+            <div class="bg-emerald-50/60 rounded-2xl p-4 border border-emerald-200/60 text-center">
+              <p class="text-xs text-slate-600 font-bold mb-1">مؤشر القدرة</p>
+              <p id="res-ability" class="font-en text-2xl font-black text-emerald-600"></p>
+            </div>
+            <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200/70 text-center">
+              <p class="text-xs text-slate-600 font-bold mb-1">الوقت المستغرق</p>
+              <p id="res-duration" class="font-en text-2xl font-black text-slate-700"></p>
+            </div>
+          </div>
+
+          <!-- Chart + Recommendations -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div class="bg-slate-50/70 rounded-2xl p-4 border border-slate-200/70">
+              <h3 class="text-sm font-extrabold text-slate-800 mb-3 text-center">أداؤك حسب المهارات الأربع</h3>
+              <div class="relative h-64">
+                <canvas id="skills-chart"></canvas>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <h3 class="text-base font-extrabold text-slate-900">توصيات لتطوير مستواك</h3>
+              <ul id="res-recommendations" class="space-y-2.5 text-sm text-slate-700"></ul>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100 no-print">
+            <button id="btn-print" type="button"
+              class="tactile-btn px-5 py-2.5 rounded-xl border-2 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-sm cursor-pointer">
+              طباعة أو حفظ PDF
+            </button>
+            <button id="btn-retake" type="button"
+              class="tactile-btn px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 border-b-4 border-indigo-800 text-white font-extrabold text-sm shadow-sm cursor-pointer">
+              إجراء اختبار جديد
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // =========================================================================
+    // 1. CONFIGURATION (Google Apps Script Deployment URL)
+    // =========================================================================
+    const DEPLOYMENT_ID = 'AKfycbyu9hgcCKJxkFIZ0Xbq7w2v1OagiRTPuz3zOinVMuiGE4TyBfrXmgJPM8BBGK7dG_XNJg';
+    const APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DEPLOYMENT_ID}/exec`;
+    const AUTO_TOTAL_QUESTIONS = 15;
+    const MANUAL_TOTAL_QUESTIONS = 6;
+    const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1'];
+
+    // =========================================================================
+    // 2. INLINE SVG VISUAL ASSETS (Crisp, Zero Broken Links on GitHub Pages)
+    // =========================================================================
+    const SVG_ASSETS = {
+      a1_vocab_library: `
+        <div class="flex justify-center">
+          <svg viewBox="0 0 320 150" class="w-full max-w-xs h-auto rounded-xl bg-white p-2 border border-slate-200">
+            <rect x="20" y="20" width="280" height="110" rx="10" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="2"/>
+            <rect x="45" y="42" width="38" height="72" rx="4" fill="#3B82F6"/>
+            <rect x="88" y="34" width="34" height="80" rx="4" fill="#F59E0B"/>
+            <rect x="127" y="48" width="36" height="66" rx="4" fill="#10B981"/>
+            <rect x="168" y="38" width="30" height="76" rx="4" fill="#8B5CF6"/>
+            <line x1="35" y1="116" x2="220" y2="116" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="258" cy="70" r="22" fill="#FEE2E2" stroke="#EF4444" stroke-width="3"/>
+            <path d="M250 78 L250 62 M266 78 L266 62 M250 66 Q258 60 266 66" stroke="#EF4444" stroke-width="2.5" fill="none"/>
+            <text x="160" y="142" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#475569" font-weight="600">QUIET ZONE — BOOKS &amp; STUDY</text>
+          </svg>
+        </div>`,
+      a1_vocab_clock: `
+        <div class="flex justify-center">
+          <svg viewBox="0 0 280 140" class="w-full max-w-xs h-auto rounded-xl bg-white p-2 border border-slate-200">
+            <circle cx="140" cy="65" r="46" fill="#FFFFFF" stroke="#4F46E5" stroke-width="4"/>
+            <circle cx="140" cy="65" r="4" fill="#1E293B"/>
+            <text x="140" y="31" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#475569">12</text>
+            <text x="176" y="69" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#475569">3</text>
+            <text x="140" y="103" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#475569">6</text>
+            <text x="104" y="69" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#475569">9</text>
+            <line x1="140" y1="65" x2="140" y2="38" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="140" y1="65" x2="165" y2="65" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+            <text x="140" y="130" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#64748B" font-weight="600">Morning English Class</text>
+          </svg>
+        </div>`,
+      a1_reading_cafe: `
+        <div class="font-en max-w-md mx-auto bg-amber-50 border-2 border-amber-200 rounded-2xl p-4 shadow-sm">
+          <div class="flex items-center justify-between border-b border-amber-200 pb-2 mb-2.5">
+            <span class="font-bold text-amber-900 text-sm">SUNNY CAFE MENU</span>
+            <span class="text-xs bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full font-semibold">Open 8 AM – 6 PM</span>
+          </div>
+          <div class="space-y-1 text-xs sm:text-sm text-slate-700">
+            <div class="flex justify-between"><span>Coffee (Hot / Iced)</span><span class="font-bold">$3.00</span></div>
+            <div class="flex justify-between"><span>Cheese Sandwich</span><span class="font-bold">$4.50</span></div>
+            <div class="flex justify-between"><span>Orange Juice</span><span class="font-bold">$2.50</span></div>
+          </div>
+          <p class="mt-2.5 text-[11px] font-semibold text-amber-800">* Closed on Sundays</p>
+        </div>`,
+      a2_vocab_weather: `
+        <div class="flex justify-center">
+          <svg viewBox="0 0 320 140" class="w-full max-w-sm h-auto rounded-xl bg-gradient-to-r from-sky-50 to-indigo-50 p-3 border border-sky-200">
+            <rect x="12" y="12" width="136" height="116" rx="12" fill="#FFFFFF" stroke="#BAE6FD" stroke-width="1.5"/>
+            <text x="80" y="34" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#0369A1">TODAY</text>
+            <path d="M55 72 Q55 56 72 56 Q80 46 95 52 Q108 54 108 68 Q116 70 114 80 L55 80 Z" fill="#94A3B8"/>
+            <line x1="65" y1="88" x2="60" y2="100" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="82" y1="88" x2="77" y2="100" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="99" y1="88" x2="94" y2="100" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round"/>
+            <text x="80" y="118" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#334155">14°C • Wet</text>
+            <rect x="172" y="12" width="136" height="116" rx="12" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1.5"/>
+            <text x="240" y="34" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#B45309">TOMORROW</text>
+            <circle cx="240" cy="70" r="18" fill="#FBBF24"/>
+            <text x="240" y="118" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#334155">26°C • Clear</text>
+          </svg>
+        </div>`,
+      a2_reading_sms: `
+        <div class="font-en max-w-md mx-auto bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2.5">
+          <div class="flex items-center gap-2 border-b border-slate-100 pb-2">
+            <div class="w-7 h-7 rounded-full bg-emerald-500 text-white text-xs font-bold flex items-center justify-center">S</div>
+            <div>
+              <p class="text-xs font-bold text-slate-800">Sara (Classmate)</p>
+              <p class="text-[10px] text-slate-400">Received 10:15 AM</p>
+            </div>
+          </div>
+          <div class="bg-slate-100 rounded-xl rounded-tl-none p-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            "Hi! The science museum is closed for repairs today, so our school trip is moved to <strong>Thursday morning</strong>. Don't forget to bring your notebook!"
+          </div>
+        </div>`,
+      a2_grammar_airport: `
+        <div class="font-en max-w-md mx-auto bg-slate-900 text-amber-300 rounded-2xl p-4 shadow-md border border-slate-700">
+          <div class="flex justify-between items-center text-[11px] text-slate-400 border-b border-slate-700 pb-1.5 mb-2">
+            <span>DEPARTURES</span><span>GATE</span><span>STATUS</span>
+          </div>
+          <div class="flex justify-between items-center text-xs sm:text-sm font-mono font-bold">
+            <span>FLIGHT BA-204 (London)</span><span>B12</span><span class="text-emerald-400">BOARDING</span>
+          </div>
+        </div>`,
+      b1_vocab_chart: `
+        <div class="flex justify-center">
+          <svg viewBox="0 0 340 155" class="w-full max-w-sm h-auto rounded-xl bg-white p-3 border border-slate-200">
+            <text x="170" y="18" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#1E293B">Monthly Electricity Usage (kWh)</text>
+            <line x1="40" y1="125" x2="310" y2="125" stroke="#94A3B8" stroke-width="1.5"/>
+            <rect x="65" y="45" width="38" height="80" rx="4" fill="#6366F1"/>
+            <text x="84" y="39" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#4F46E5">320</text>
+            <text x="84" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#475569">Jan</text>
+            <rect x="130" y="65" width="38" height="60" rx="4" fill="#6366F1"/>
+            <text x="149" y="59" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#4F46E5">240</text>
+            <text x="149" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#475569">Feb</text>
+            <rect x="195" y="85" width="38" height="40" rx="4" fill="#10B981"/>
+            <text x="214" y="79" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#059669">160</text>
+            <text x="214" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#475569">Mar</text>
+            <rect x="260" y="95" width="38" height="30" rx="4" fill="#10B981"/>
+            <text x="279" y="89" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#059669">120</text>
+            <text x="279" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#475569">Apr</text>
+          </svg>
+        </div>`,
+      b1_reading_notice: `
+        <div class="font-en max-w-lg mx-auto bg-indigo-50/70 border border-indigo-200 rounded-2xl p-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
+          <p class="font-bold text-indigo-900 mb-1.5">COMMUNITY GYM NOTICE</p>
+          <p>Starting next Monday, the swimming pool will close at 8:00 PM instead of 9:30 PM for routine maintenance. Members who prefer evening swimming may use our sister branch on Oak Street at no extra cost until the end of the month.</p>
+        </div>`,
+      b2_reading_email: `
+        <div class="font-en max-w-lg mx-auto bg-white border border-slate-200 rounded-2xl p-4 shadow-sm text-xs sm:text-sm text-slate-700 space-y-2">
+          <div class="border-b border-slate-100 pb-2 text-xs text-slate-500">
+            <span class="font-bold text-slate-800">Subject:</span> Remote Work Policy Update
+          </div>
+          <p class="leading-relaxed">
+            Following our six-month trial, the team will adopt a hybrid schedule. While employees are expected in the office on Tuesdays and Wednesdays for collaborative workshops, they may work remotely on the remaining days provided core hours (10 AM–3 PM) are observed.
+          </p>
+        </div>`,
+      b2_vocab_sign: `
+        <div class="flex justify-center">
+          <svg viewBox="0 0 320 130" class="w-full max-w-xs h-auto rounded-xl bg-white p-2 border border-slate-200">
+            <rect x="16" y="16" width="288" height="98" rx="12" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.5"/>
+            <polygon points="56,38 78,78 34,78" fill="#F59E0B"/>
+            <text x="56" y="72" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" font-weight="800" fill="#FFFFFF">!</text>
+            <text x="190" y="54" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="800" fill="#92400E">PEDESTRIAN ZONE ONLY</text>
+            <text x="190" y="74" text-anchor="middle" font-family="Inter,sans-serif" font-size="10.5" fill="#78350F">Delivery vehicles permitted</text>
+            <text x="190" y="90" text-anchor="middle" font-family="Inter,sans-serif" font-size="10.5" fill="#78350F">strictly between 6 AM and 9 AM.</text>
+          </svg>
+        </div>`,
+      c1_reading_article: `
+        <div class="font-en max-w-lg mx-auto bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
+          <p class="font-bold text-slate-900 mb-1.5">Urban Green Spaces &amp; Productivity</p>
+          <p>Recent longitudinal studies suggest that even brief exposure to urban parks mitigates cognitive fatigue far more effectively than indoor breaks. Interestingly, the restorative effect appears independent of physical exertion, implying that visual complexity and natural light play a decisive role.</p>
+        </div>`
+    };
+
+    // =========================================================================
+    // 3. QUESTION BANK (30 Questions: 6 per level A1..C1, all 4 skills)
+    // =========================================================================
+    const QUESTION_BANK = [
+      // ---------------- A1 (Tier 0) ----------------
+      {
+        id: 'A1-V1', level: 'A1', tier: 0, skill: 'Vocabulary',
+        instructionAr: 'انظر إلى الصورة واختر المكان الصحيح:',
+        visualHtml: SVG_ASSETS.a1_vocab_library,
+        prompt: 'Where can you find many books and read quietly?',
+        options: ['A library', 'A supermarket', 'A cinema', 'A train station'],
+        correct: 0
+      },
+      {
+        id: 'A1-V2', level: 'A1', tier: 0, skill: 'Vocabulary',
+        instructionAr: 'انظر إلى الساعة واختر الوقت الصحيح:',
+        visualHtml: SVG_ASSETS.a1_vocab_clock,
+        prompt: 'Look at the clock. The English class starts at ______.',
+        options: ['twelve fifteen', 'three o\'clock', 'six thirty', 'nine fifteen'],
+        correct: 0
+      },
+      {
+        id: 'A1-G1', level: 'A1', tier: 0, skill: 'Grammar',
+        instructionAr: 'اختر الكلمة الصحيحة لإكمال الجملة:',
+        prompt: 'My sister ______ a teacher. She works at a primary school.',
+        options: ['am', 'is', 'are', 'be'],
+        correct: 1
+      },
+      {
+        id: 'A1-G2', level: 'A1', tier: 0, skill: 'Grammar',
+        instructionAr: 'اختر الصيغة الصحيحة:',
+        prompt: 'Every morning, I ______ a cup of tea before work.',
+        options: ['drinks', 'drinking', 'drink', 'drank'],
+        correct: 2
+      },
+      {
+        id: 'A1-R1', level: 'A1', tier: 0, skill: 'Reading',
+        instructionAr: 'اقرأ قائمة المقهى ثم أجب عن السؤال:',
+        visualHtml: SVG_ASSETS.a1_reading_cafe,
+        prompt: 'Which day is Sunny Cafe closed?',
+        options: ['Monday', 'Friday', 'Saturday', 'Sunday'],
+        correct: 3
+      },
+      {
+        id: 'A1-L1', level: 'A1', tier: 0, skill: 'Listening',
+        instructionAr: 'استمع للجملة الصوتية ثم اختر الإجابة الصحيحة:',
+        audioText: 'Excuse me, where is the nearest bus stop? It is right next to the bank.',
+        prompt: 'Where is the bus stop?',
+        options: ['Inside the school', 'Next to the bank', 'Behind the hospital', 'Opposite the park'],
+        correct: 1
+      },
+
+      // ---------------- A2 (Tier 1) ----------------
+      {
+        id: 'A2-V1', level: 'A2', tier: 1, skill: 'Vocabulary',
+        instructionAr: 'انظر إلى توقعات الطقس واختر الوصف الصحيح:',
+        visualHtml: SVG_ASSETS.a2_vocab_weather,
+        prompt: 'Look at the forecast. Today is rainy and cold, so you should take ______.',
+        options: ['sunglasses', 'an umbrella', 'a swimsuit', 'sandals'],
+        correct: 1
+      },
+      {
+        id: 'A2-G1', level: 'A2', tier: 1, skill: 'Grammar',
+        instructionAr: 'اختر الزمن الصحيح للجملة:',
+        prompt: 'Yesterday, we ______ to the museum and saw old paintings.',
+        options: ['go', 'going', 'went', 'will go'],
+        correct: 2
+      },
+      {
+        id: 'A2-G2', level: 'A2', tier: 1, skill: 'Grammar',
+        instructionAr: 'انظر إلى لوحة المطار وأكمل الجملة:',
+        visualHtml: SVG_ASSETS.a2_grammar_airport,
+        prompt: 'Passengers ______ hurry to Gate B12 because the flight is boarding now.',
+        options: ['should', 'couldn\'t', 'mustn\'t', 'didn\'t'],
+        correct: 0
+      },
+      {
+        id: 'A2-R1', level: 'A2', tier: 1, skill: 'Reading',
+        instructionAr: 'اقرأ رسالة سارة وأجب عن السؤال:',
+        visualHtml: SVG_ASSETS.a2_reading_sms,
+        prompt: 'Why is the school trip moved to Thursday?',
+        options: [
+          'The teacher is sick today.',
+          'The museum is closed for repairs.',
+          'The students forgot their notebooks.',
+          'The weather is too hot.'
+        ],
+        correct: 1
+      },
+      {
+        id: 'A2-L1', level: 'A2', tier: 1, skill: 'Listening',
+        instructionAr: 'استمع إلى المحادثة القصيرة ثم أجب:',
+        audioText: 'I usually take the train to work, but today I am driving because it is raining heavily.',
+        prompt: 'How is the speaker travelling to work today?',
+        options: ['By train', 'By bicycle', 'By car', 'On foot'],
+        correct: 2
+      },
+      {
+        id: 'A2-V2', level: 'A2', tier: 1, skill: 'Vocabulary',
+        instructionAr: 'اختر الكلمة المناسبة للسياق:',
+        prompt: 'This suitcase is very ______. Can you help me carry it upstairs?',
+        options: ['heavy', 'cheap', 'quiet', 'hungry'],
+        correct: 0
+      },
+
+      // ---------------- B1 (Tier 2) ----------------
+      {
+        id: 'B1-V1', level: 'B1', tier: 2, skill: 'Vocabulary',
+        instructionAr: 'ادرس الرسم البياني واختر الكلمة الأدق:',
+        visualHtml: SVG_ASSETS.b1_vocab_chart,
+        prompt: 'According to the chart, electricity usage ______ steadily from January to April.',
+        options: ['increased', 'doubled', 'decreased', 'remained unchanged'],
+        correct: 2
+      },
+      {
+        id: 'B1-G1', level: 'B1', tier: 2, skill: 'Grammar',
+        instructionAr: 'اختر التركيب النحوي الصحيح:',
+        prompt: 'If I ______ more free time this weekend, I would learn how to bake bread.',
+        options: ['have', 'had', 'will have', 'am having'],
+        correct: 1
+      },
+      {
+        id: 'B1-G2', level: 'B1', tier: 2, skill: 'Grammar',
+        instructionAr: 'اختر الصيغة الصحيحة للمضارع التام:',
+        prompt: 'Nadia has lived in Alexandria ______ she was ten years old.',
+        options: ['for', 'during', 'since', 'until'],
+        correct: 2
+      },
+      {
+        id: 'B1-R1', level: 'B1', tier: 2, skill: 'Reading',
+        instructionAr: 'اقرأ إعلان النادي الرياضي ثم أجب:',
+        visualHtml: SVG_ASSETS.b1_reading_notice,
+        prompt: 'What can members do if they want to swim after 8:00 PM?',
+        options: [
+          'Pay an extra fee at the main pool.',
+          'Use the Oak Street branch for free.',
+          'Wait until 9:30 PM for maintenance to finish.',
+          'Book a private lesson on Monday.'
+        ],
+        correct: 1
+      },
+      {
+        id: 'B1-L1', level: 'B1', tier: 2, skill: 'Listening',
+        instructionAr: 'استمع إلى المقطع الصوتي وحدد الفكرة الرئيسية:',
+        audioText: 'Although the hotel was a bit far from the city center, the staff were friendly and the breakfast was fantastic.',
+        prompt: 'What does the speaker say about the hotel?',
+        options: [
+          'It was terrible and overpriced.',
+          'It was close to the center but noisy.',
+          'It was far out, yet the service and food were great.',
+          'It did not serve breakfast.'
+        ],
+        correct: 2
+      },
+      {
+        id: 'B1-V2', level: 'B1', tier: 2, skill: 'Vocabulary',
+        instructionAr: 'اختر الفعل المركب المناسب:',
+        prompt: 'Due to the heavy fog, the football match was ______ until next Friday.',
+        options: ['put off', 'looked after', 'turned on', 'given up'],
+        correct: 0
+      },
+
+      // ---------------- B2 (Tier 3) ----------------
+      {
+        id: 'B2-V1', level: 'B2', tier: 3, skill: 'Vocabulary',
+        instructionAr: 'اقرأ اللوحة الإرشادية واختر المعنى الصحيح:',
+        visualHtml: SVG_ASSETS.b2_vocab_sign,
+        prompt: 'Based on the sign, delivery vans are ______ outside the 6 AM – 9 AM window.',
+        options: ['encouraged', 'prohibited', 'subsidized', 'prioritized'],
+        correct: 1
+      },
+      {
+        id: 'B2-G1', level: 'B2', tier: 3, skill: 'Grammar',
+        instructionAr: 'اختر الصيغة الصحيحة للتعبير عن الندم في الماضي:',
+        prompt: 'I wish I ______ so much money on that gadget; I barely use it now.',
+        options: ['didn\'t spend', 'haven\'t spent', 'hadn\'t spent', 'wouldn\'t spend'],
+        correct: 2
+      },
+      {
+        id: 'B2-G2', level: 'B2', tier: 3, skill: 'Grammar',
+        instructionAr: 'أكمل الجملة بصيغة المبني للمجهول المناسبة:',
+        prompt: 'The new metro line ______ by the end of next year if everything goes to plan.',
+        options: ['will have been completed', 'is completing', 'has completed', 'would complete'],
+        correct: 0
+      },
+      {
+        id: 'B2-R1', level: 'B2', tier: 3, skill: 'Reading',
+        instructionAr: 'اقرأ البريد الإلكتروني التالي وأجب:',
+        visualHtml: SVG_ASSETS.b2_reading_email,
+        prompt: 'Under the new policy, what is mandatory for all team members?',
+        options: [
+          'Working from the office five days a week.',
+          'Attending the office on Tuesdays and Wednesdays.',
+          'Working remotely only during workshops.',
+          'Extending core hours until 5 PM.'
+        ],
+        correct: 1
+      },
+      {
+        id: 'B2-L1', level: 'B2', tier: 3, skill: 'Listening',
+        instructionAr: 'استمع إلى التصريح التالي وحدد موقف المتحدث:',
+        audioText: 'While the software update fixed several security flaws, it unexpectedly slowed down older devices, leaving many users frustrated.',
+        prompt: 'How does the speaker view the software update?',
+        options: [
+          'As a complete success with no drawbacks.',
+          'As beneficial for security, but problematic for older hardware.',
+          'As unnecessary because older devices were already fast.',
+          'As a failure that introduced new security flaws.'
+        ],
+        correct: 1
+      },
+      {
+        id: 'B2-V2', level: 'B2', tier: 3, skill: 'Vocabulary',
+        instructionAr: 'اختر الكلمة الأدق لإكمال الجملة:',
+        prompt: 'Her presentation was remarkably ______; she explained a complex topic in just five minutes.',
+        options: ['concise', 'ambiguous', 'reluctant', 'fragile'],
+        correct: 0
+      },
+
+      // ---------------- C1 (Tier 4) ----------------
+      {
+        id: 'C1-V1', level: 'C1', tier: 4, skill: 'Vocabulary',
+        instructionAr: 'اختر الكلمة الأكثر دقة في السياق الأكاديمي:',
+        prompt: 'The committee\'s findings were ______ by a lack of reliable longitudinal data.',
+        options: ['undermined', 'facilitated', 'bolstered', 'amplified'],
+        correct: 0
+      },
+      {
+        id: 'C1-G1', level: 'C1', tier: 4, skill: 'Grammar',
+        instructionAr: 'اختر التركيب البلاغي الصحيح (Inversion):',
+        prompt: 'Not only ______ the deadline, but she also exceeded every quality benchmark.',
+        options: ['she met', 'did she meet', 'she did meet', 'had she been met'],
+        correct: 1
+      },
+      {
+        id: 'C1-G2', level: 'C1', tier: 4, skill: 'Grammar',
+        instructionAr: 'أكمل الجملة الشرطية المختلطة (Mixed Conditional):',
+        prompt: 'Had they invested in renewable energy earlier, their operational costs ______ significantly lower today.',
+        options: ['would be', 'will be', 'would have been', 'are'],
+        correct: 0
+      },
+      {
+        id: 'C1-R1', level: 'C1', tier: 4, skill: 'Reading',
+        instructionAr: 'اقرأ المقتطف البحثي وأجب عن الاستنتاج الصحيح:',
+        visualHtml: SVG_ASSETS.c1_reading_article,
+        prompt: 'What can be inferred from the passage about the restorative effect of parks?',
+        options: [
+          'It requires intense aerobic exercise to take effect.',
+          'It is primarily driven by sensory engagement with nature.',
+          'Indoor breaks are equally effective for cognitive fatigue.',
+          'Only long-term residents benefit from urban parks.'
+        ],
+        correct: 1
+      },
+      {
+        id: 'C1-L1', level: 'C1', tier: 4, skill: 'Listening',
+        instructionAr: 'استمع إلى التحليل الصوتي واختر الاستنتاج الدقيق:',
+        audioText: 'Critics argue that the proposed regulation, though well-intentioned, could inadvertently stifle innovation among smaller startups.',
+        prompt: 'What concern do critics raise about the regulation?',
+        options: [
+          'It was designed to harm small businesses intentionally.',
+          'It may unintentionally hinder growth for emerging companies.',
+          'It favors startups over established corporations.',
+          'It lacks any positive intention.'
+        ],
+        correct: 1
+      },
+      {
+        id: 'C1-V2', level: 'C1', tier: 4, skill: 'Vocabulary',
+        instructionAr: 'اختر التعبير الاصطلاحي الأنسب:',
+        prompt: 'After hours of fruitless debate, the chairwoman decided to ______ and move to a vote.',
+        options: ['cut to the chase', 'beat around the bush', 'miss the boat', 'sit on the fence'],
+        correct: 0
+      }
+    ];
+
+    // =========================================================================
+    // 4. CEFR LEVEL METADATA & RECOMMENDATIONS
+    // =========================================================================
+    const CEFR_INFO = {
+      A1: {
+        title: 'Beginner (مبتدئ)',
+        desc: 'لديك أساسيات بسيطة ويمكنك فهم العبارات اليومية المألوفة والتعريف بنفسك، وتحتاج لبناء حصيلة مفردات وقواعد أساسية.',
+        recs: [
+          'ابدأ بتعلّم 10 كلمات يومية جديدة مع ربطها بالصور والأمثلة القصيرة.',
+          'ركّز على الأزمنة الأساسية (المضارع البسيط والماضي البسيط) في جمل قصيرة.',
+          'استمع لمقاطع إنجليزية بطيئة لمدة 10 دقائق يومياً مع قراءة النص المرافق.'
+        ]
+      },
+      A2: {
+        title: 'Elementary (أساسي)',
+        desc: 'يمكنك التواصل في المواقف اليومية البسيطة وفهم النصوص القصيرة والرسائل المباشرة بثقة جيدة.',
+        recs: [
+          'تدرّب على التحدث في مواقف الحياة اليومية (المطعم، التسوق، السفر).',
+          'اقرأ قصصاً قصيرة مبسطة (Graded Readers) لتعزيز الفهم القرائي.',
+          'راجع أدوات الربط والصفات المقارنة لتكوين جمل أطول وأوضح.'
+        ]
+      },
+      B1: {
+        title: 'Intermediate (متوسط)',
+        desc: 'مستواك يؤهلك للتعامل مع معظم المواقف أثناء السفر أو الدراسة، وفهم الأفكار الرئيسية في النصوص والمحادثات الواضحة.',
+        recs: [
+          'شاهد فيديوهات أو بودكاست بالإنجليزية بدون ترجمة عربية (مع ترجمة إنجليزية فقط).',
+          'تدرّب على كتابة فقرات مترابطة تعبّر فيها عن رأيك وخططك المستقبلية.',
+          'ركّز على الأفعال المركبة (Phrasal Verbs) وجمل الشرط.'
+        ]
+      },
+      B2: {
+        title: 'Upper-Intermediate (فوق المتوسط)',
+        desc: 'تتمتع بطلاقة جيدة جداً، وتستطيع فهم النصوص المعقدة والمناقشات المهنية والتعبير عن آرائك بوضوح وإقناع.',
+        recs: [
+          'اقرأ مقالات تحليلية وأخباراً دولية لتوسيع مفرداتك الأكاديمية والمهنية.',
+          'تدرّب على التعبير الدقيق عن الفروق البسيطة في المعنى (Nuance) وصيغ التمني والمبني للمجهول.',
+          'شارك في نقاشات أو عروض تقديمية قصيرة بالإنجليزية لتثبيت الطلاقة.'
+        ]
+      },
+      C1: {
+        title: 'Advanced (متقدم)',
+        desc: 'لديك إتقان متقدم للغة الإنجليزية، ويمكنك فهم النصوص العميقة والتعبيرات الاصطلاحية والتواصل بمرونة واحترافية عالية.',
+        recs: [
+          'واصل القراءة في مجالات تخصصك (أبحاث، تقارير، أدب) للحفاظ على ثراء المفردات.',
+          'ركّز على الأساليب البلاغية المتقدمة والتراكيب المعقدة مثل (Inversion).',
+          'جرّب التدرب على اختبارات دولية متقدمة مثل IELTS أو TOEFL لتوثيق مستواك.'
+        ]
+      }
+    };
+
+    // =========================================================================
+    // 5. APPLICATION STATE
+    // =========================================================================
+    const state = {
+      studentName: '',
+      studentAge: 0,
+      mode: 'auto', // 'auto' (starts from A1 & climbs) | 'manual' (specific level)
+      manualLevel: 'A1',
+      totalQuestions: AUTO_TOTAL_QUESTIONS,
+      startTime: null,
+      questionIndex: 0,
+      currentTier: 0, // Always starts at A1 (index 0) in auto mode!
+      streakCorrect: 0,
+      abilityIndex: 0.8,
+      usedIds: new Set(),
+      currentQuestion: null,
+      selectedOption: null,
+      answers: [],
+      skillStats: {
+        Vocabulary: { correct: 0, total: 0 },
+        Grammar: { correct: 0, total: 0 },
+        Reading: { correct: 0, total: 0 },
+        Listening: { correct: 0, total: 0 }
+      },
+      chartInstance: null,
+      lastPayload: null
+    };
+
+    // =========================================================================
+    // 6. DOM HELPERS & SPEECH SYNTHESIS
+    // =========================================================================
+    const $ = (id) => document.getElementById(id);
+
+    function showScreen(screenId) {
+      ['screen-welcome', 'screen-quiz', 'screen-results'].forEach((id) => {
+        $(id).classList.toggle('hidden', id !== screenId);
+      });
+    }
+
+    function speakText(text, rate = 1.0, waveEl = null) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-US';
+      utter.rate = rate;
+      const voices = window.speechSynthesis.getVoices();
+      const enVoice = voices.find((v) => v.lang.startsWith('en-GB')) || voices.find((v) => v.lang.startsWith('en'));
+      if (enVoice) utter.voice = enVoice;
+
+      if (waveEl) {
+        waveEl.classList.remove('wave-paused');
+        utter.onend = () => waveEl.classList.add('wave-paused');
+        utter.onerror = () => waveEl.classList.add('wave-paused');
+      }
+      window.speechSynthesis.speak(utter);
+    }
+
+    // =========================================================================
+    // 7. MODE SELECTION HANDLERS
+    // =========================================================================
+    function setTestMode(mode) {
+      state.mode = mode;
+      $('mode-auto-btn').classList.toggle('mode-card-active', mode === 'auto');
+      $('mode-manual-btn').classList.toggle('mode-card-active', mode === 'manual');
+      $('manual-level-box').classList.toggle('hidden', mode !== 'manual');
+
+      if (mode === 'auto') {
+        state.totalQuestions = AUTO_TOTAL_QUESTIONS;
+        $('mode-summary-text').textContent = '15 سؤالاً متدرجاً من A1 • المدة 5–7 دقائق';
+      } else {
+        state.totalQuestions = MANUAL_TOTAL_QUESTIONS;
+        $('mode-summary-text').textContent = `6 أسئلة خاصة بمستوى ${state.manualLevel} • المدة 2–3 دقائق`;
+      }
+    }
+
+    $('mode-auto-btn').addEventListener('click', () => setTestMode('auto'));
+    $('mode-manual-btn').addEventListener('click', () => setTestMode('manual'));
+
+    document.querySelectorAll('.level-pill').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        state.manualLevel = btn.dataset.level;
+        document.querySelectorAll('.level-pill').forEach((b) => b.classList.remove('level-pill-active'));
+        btn.classList.add('level-pill-active');
+        $('manual-level-hint').textContent = `المستوى المختار: ${state.manualLevel} (${CEFR_INFO[state.manualLevel].title})`;
+        if (state.mode === 'manual') {
+          $('mode-summary-text').textContent = `6 أسئلة خاصة بمستوى ${state.manualLevel} • المدة 2–3 دقائق`;
+        }
+      });
+    });
+
+    // =========================================================================
+    // 8. QUESTION SELECTION ENGINE (Progressive A1->C1 or Manual Level)
+    // =========================================================================
+    function pickNextQuestion() {
+      if (state.mode === 'manual') {
+        const targetTier = LEVELS.indexOf(state.manualLevel);
+        const pool = QUESTION_BANK.filter((q) => q.tier === targetTier && !state.usedIds.has(q.id));
+        return pool[0];
+      }
+
+      // Auto Progressive Mode: Balance skills at currentTier (starting from A1 = Tier 0)
+      const skillCounts = Object.entries(state.skillStats)
+        .map(([skill, s]) => ({ skill, total: s.total }))
+        .sort((a, b) => a.total - b.total);
+
+      const candidatesAtTier = QUESTION_BANK.filter(
+        (q) => q.tier === state.currentTier && !state.usedIds.has(q.id)
+      );
+
+      for (const { skill } of skillCounts) {
+        const match = candidatesAtTier.find((q) => q.skill === skill);
+        if (match) return match;
+      }
+      if (candidatesAtTier.length > 0) return candidatesAtTier[0];
+
+      const remaining = QUESTION_BANK
+        .filter((q) => !state.usedIds.has(q.id))
+        .sort((a, b) => Math.abs(a.tier - state.currentTier) - Math.abs(b.tier - state.currentTier));
+      return remaining[0];
+    }
+
+    function renderQuestion() {
+      const q = pickNextQuestion();
+      state.currentQuestion = q;
+      state.usedIds.add(q.id);
+      state.selectedOption = null;
+
+      const num = state.questionIndex + 1;
+      const total = state.totalQuestions;
+      const remaining = total - num;
+      const pct = Math.round((num / total) * 100);
+
+      $('q-counter').textContent = `السؤال ${num} من ${total}`;
+      $('q-skill-badge').textContent = q.skill;
+      $('q-tier-badge').textContent = `Level ${q.level}`;
+      $('q-remaining').textContent = remaining === 0 ? 'السؤال الأخير!' : `متبقي ${remaining} ${remaining === 1 ? 'سؤال' : remaining <= 10 ? 'أسئلة' : 'سؤالاً'}`;
+      $('q-progress-pct').textContent = `${pct}%`;
+      $('q-progress-bar').style.width = `${pct}%`;
+
+      // Re-trigger smooth card entrance animation
+      const qCard = $('question-card');
+      qCard.classList.remove('animate-fade-slide');
+      void qCard.offsetWidth;
+      qCard.classList.add('animate-fade-slide');
+
+      $('q-instruction-ar').textContent = q.instructionAr;
+      $('q-prompt').textContent = q.prompt;
+      $('quiz-error').classList.add('hidden');
+
+      // Render Visual or Listening Player
+      const visBox = $('q-visual-container');
+      visBox.innerHTML = '';
+      if (q.audioText) {
+        visBox.classList.remove('hidden');
+        visBox.innerHTML = `
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <button id="btn-play-normal" type="button"
+                class="tactile-btn px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 border-b-4 border-rose-800 text-white font-bold text-sm flex items-center gap-2 shadow-sm cursor-pointer">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
+                <span>استمع للمقطع</span>
+              </button>
+              <button id="btn-play-slow" type="button"
+                class="tactile-btn px-3 py-2.5 rounded-xl bg-white border-2 border-slate-300 hover:bg-slate-100 text-slate-700 font-bold text-xs cursor-pointer">
+                بطيء 0.8x
+              </button>
+            </div>
+            <div id="audio-wave" class="wave-paused flex items-end gap-1 h-7 px-3">
+              <span class="wave-bar w-1.5 h-3 bg-rose-500 rounded-full" style="animation-delay:0s"></span>
+              <span class="wave-bar w-1.5 h-6 bg-rose-500 rounded-full" style="animation-delay:0.15s"></span>
+              <span class="wave-bar w-1.5 h-4 bg-rose-500 rounded-full" style="animation-delay:0.3s"></span>
+              <span class="wave-bar w-1.5 h-7 bg-rose-500 rounded-full" style="animation-delay:0.45s"></span>
+              <span class="wave-bar w-1.5 h-5 bg-rose-500 rounded-full" style="animation-delay:0.6s"></span>
+              <span class="wave-bar w-1.5 h-3 bg-rose-500 rounded-full" style="animation-delay:0.2s"></span>
+            </div>
+            <button id="btn-toggle-transcript" type="button" class="text-xs text-slate-500 underline hover:text-slate-800 cursor-pointer">
+              إظهار النص إذا لم يعمل الصوت
+            </button>
+          </div>
+          <p id="audio-transcript" class="hidden mt-3 pt-3 border-t border-slate-200 font-en text-sm text-slate-600 italic"></p>
+        `;
+        $('audio-transcript').textContent = `"${q.audioText}"`;
+        const waveEl = $('audio-wave');
+        $('btn-play-normal').addEventListener('click', () => speakText(q.audioText, 1.0, waveEl));
+        $('btn-play-slow').addEventListener('click', () => speakText(q.audioText, 0.78, waveEl));
+        $('btn-toggle-transcript').addEventListener('click', () => {
+          $('audio-transcript').classList.toggle('hidden');
+        });
+      } else if (q.visualHtml) {
+        visBox.classList.remove('hidden');
+        visBox.innerHTML = q.visualHtml;
+      } else {
+        visBox.classList.add('hidden');
+      }
+
+      // Render Options with staggered popIn animation
+      const optionsEl = $('q-options');
+      optionsEl.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+      q.options.forEach((optText, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.style.animationDelay = `${idx * 55}ms`;
+        btn.className = 'animate-pop option-card w-full text-left p-4 rounded-2xl border-2 border-slate-200 border-b-4 bg-white flex items-center gap-3 cursor-pointer';
+        btn.innerHTML = `
+          <span class="opt-letter w-8 h-8 rounded-xl bg-slate-100 text-slate-700 font-extrabold text-sm flex items-center justify-center shrink-0 transition">${letters[idx]}</span>
+          <span class="text-sm sm:text-base font-semibold text-slate-800">${optText}</span>
+        `;
+        btn.addEventListener('click', () => selectOption(idx, btn));
+        optionsEl.appendChild(btn);
+      });
+
+      $('btn-next').textContent = num === total ? 'إنهاء وعرض النتيجة ✓' : 'السؤال التالي ←';
+    }
+
+    function selectOption(idx, clickedBtn) {
+      state.selectedOption = idx;
+      $('quiz-error').classList.add('hidden');
+      const allBtns = $('q-options').querySelectorAll('button');
+      allBtns.forEach((b) => b.classList.remove('option-selected'));
+      clickedBtn.classList.add('option-selected');
+    }
+
+    function submitAnswerAndAdvance() {
+      if (state.selectedOption === null) {
+        $('quiz-error').classList.remove('hidden');
+        return;
+      }
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
+      const q = state.currentQuestion;
+      const isCorrect = state.selectedOption === q.correct;
+
+      // Record answer
+      state.answers.push({
+        id: q.id,
+        level: q.level,
+        skill: q.skill,
+        selected: q.options[state.selectedOption],
+        correct: q.options[q.correct],
+        isCorrect
+      });
+
+      state.skillStats[q.skill].total += 1;
+      if (isCorrect) state.skillStats[q.skill].correct += 1;
+
+      // Update adaptive progression in Auto mode (starts at A1 = 0 and climbs)
+      if (state.mode === 'auto') {
+        if (isCorrect) {
+          state.streakCorrect += 1;
+          state.abilityIndex = Math.min(5.0, state.abilityIndex + 0.45);
+          // Step up quickly from A1 when answering right (1 right in early tiers or 2 in a row later)
+          if (state.currentTier === 0 || state.streakCorrect >= 2) {
+            state.currentTier = Math.min(4, state.currentTier + 1);
+            state.streakCorrect = 0;
+          }
+        } else {
+          state.streakCorrect = 0;
+          state.abilityIndex = Math.max(0.3, state.abilityIndex - 0.30);
+          state.currentTier = Math.max(0, state.currentTier - 1);
+        }
+      }
+
+      state.questionIndex += 1;
+      if (state.questionIndex < state.totalQuestions) {
+        renderQuestion();
+      } else {
+        finishTest();
+      }
+    }
+
+    // =========================================================================
+    // 9. SCORING, CONFETTI, CHARTING & GOOGLE SHEETS SYNC
+    // =========================================================================
+    function determineCEFR(ability) {
+      if (ability < 1.3) return 'A1';
+      if (ability < 2.2) return 'A2';
+      if (ability < 3.1) return 'B1';
+      if (ability < 4.0) return 'B2';
+      return 'C1';
+    }
+
+    function finishTest() {
+      const durationSec = Math.max(1, Math.round((Date.now() - state.startTime) / 1000));
+      const totalCorrect = state.answers.filter((a) => a.isCorrect).length;
+      const overallScore = Math.round((totalCorrect / state.totalQuestions) * 100);
+
+      let cefrLevel;
+      let levelTitle;
+      let abilityOut;
+
+      if (state.mode === 'manual') {
+        cefrLevel = state.manualLevel;
+        const passStatus = overallScore >= 70 ? 'اجتياز ممتاز' : overallScore >= 50 ? 'مستوى جيد' : 'يحتاج مراجعة';
+        levelTitle = `${CEFR_INFO[cefrLevel].title} — ${passStatus}`;
+        abilityOut = Number(((LEVELS.indexOf(cefrLevel) + (overallScore / 100))).toFixed(2));
+        $('res-mode-badge').textContent = `اختبار مستوى مخصص (${cefrLevel})`;
+        $('res-box-label').textContent = 'المستوى المختبر';
+      } else {
+        cefrLevel = determineCEFR(state.abilityIndex);
+        levelTitle = CEFR_INFO[cefrLevel].title;
+        abilityOut = Number(state.abilityIndex.toFixed(2));
+        $('res-mode-badge').textContent = 'تقييم شامل متدرج من A1';
+        $('res-box-label').textContent = 'المستوى المحدد';
+      }
+
+      const info = CEFR_INFO[cefrLevel];
+      const skillPct = {};
+      Object.keys(state.skillStats).forEach((k) => {
+        const s = state.skillStats[k];
+        skillPct[k] = s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0;
+      });
+
+      // Populate Results UI
+      showScreen('screen-results');
+      $('res-student-heading').textContent = `${state.studentName} (${state.studentAge} سنة)`;
+      $('res-cefr-code').textContent = cefrLevel;
+      $('res-cefr-title').textContent = levelTitle;
+      $('res-level-desc').textContent = info.desc;
+      $('res-accuracy').textContent = `${overallScore}%`;
+      $('res-ability').textContent = `${abilityOut.toFixed(2)} / 5`;
+
+      const mins = Math.floor(durationSec / 60);
+      const secs = durationSec % 60;
+      $('res-duration').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+
+      const recList = $('res-recommendations');
+      recList.innerHTML = '';
+      info.recs.forEach((r) => {
+        const li = document.createElement('li');
+        li.className = 'flex items-start gap-2.5 bg-slate-50 p-3 rounded-xl border border-slate-200/60';
+        li.innerHTML = `<span class="text-indigo-600 font-bold mt-0.5">✓</span><span>${r}</span>`;
+        recList.appendChild(li);
+      });
+
+      renderSkillsChart(skillPct);
+
+      // Launch celebratory confetti
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+      }
+
+      // Send Payload to Google Sheets
+      const payload = {
+        name: state.studentName,
+        age: state.studentAge,
+        cefrLevel,
+        levelTitle,
+        overallScore,
+        abilityIndex: abilityOut,
+        skills: skillPct,
+        durationSec,
+        answers: state.answers
+      };
+      state.lastPayload = payload;
+      syncToGoogleSheets(payload);
+    }
+
+    function renderSkillsChart(skillPct) {
+      const ctx = $('skills-chart').getContext('2d');
+      if (state.chartInstance) state.chartInstance.destroy();
+      state.chartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Vocabulary', 'Grammar', 'Reading', 'Listening'],
+          datasets: [{
+            label: 'Accuracy (%)',
+            data: [
+              skillPct.Vocabulary,
+              skillPct.Grammar,
+              skillPct.Reading,
+              skillPct.Listening
+            ],
+            backgroundColor: ['#f59e0b', '#4f46e5', '#10b981', '#f43f5e'],
+            borderRadius: 10,
+            maxBarThickness: 44
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, max: 100, ticks: { callback: (v) => v + '%' } }
+          }
+        }
+      });
+    }
+
+    async function syncToGoogleSheets(payload) {
+      const banner = $('sync-banner');
+      const icon = $('sync-icon');
+      const title = $('sync-title');
+      const sub = $('sync-subtitle');
+      const retryBtn = $('btn-retry-sync');
+
+      banner.className = 'animate-fade-slide rounded-2xl p-4 border bg-indigo-50 border-indigo-200 text-indigo-900 flex flex-wrap items-center justify-between gap-3 no-print';
+      icon.className = 'w-8 h-8 rounded-full bg-indigo-200 text-indigo-700 flex items-center justify-center shrink-0';
+      icon.textContent = '...';
+      title.textContent = 'جاري حفظ نتيجتك في سجل جوجل شيت...';
+      sub.textContent = 'يرجى الانتظار لحظة.';
+      retryBtn.classList.add('hidden');
+
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        banner.className = 'animate-fade-slide rounded-2xl p-4 border bg-emerald-50 border-emerald-200 text-emerald-900 flex flex-wrap items-center justify-between gap-3 no-print';
+        icon.className = 'w-8 h-8 rounded-full bg-emerald-200 text-emerald-800 flex items-center justify-center shrink-0 font-bold';
+        icon.textContent = '✓';
+        title.textContent = 'تم تسجيل النتيجة بنجاح في Google Sheets!';
+        sub.textContent = 'يمكن للمعلم مراجعة نتيجتك وتفاصيل إجاباتك مباشرة.';
+      } catch (err) {
+        banner.className = 'animate-fade-slide rounded-2xl p-4 border bg-rose-50 border-rose-200 text-rose-900 flex flex-wrap items-center justify-between gap-3 no-print';
+        icon.className = 'w-8 h-8 rounded-full bg-rose-200 text-rose-800 flex items-center justify-center shrink-0 font-bold';
+        icon.textContent = '!';
+        title.textContent = 'تعذر الاتصال بسجل Google Sheets حالياً';
+        sub.textContent = 'تأكد من اتصالك بالإنترنت ثم اضغط على إعادة المحاولة.';
+        retryBtn.classList.remove('hidden');
+      }
+    }
+
+    // =========================================================================
+    // 10. EVENT LISTENERS & INIT
+    // =========================================================================
+    $('start-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = $('student-name').value.trim();
+      const age = parseInt($('student-age').value, 10);
+      const errBox = $('form-error');
+
+      if (name.length < 2) {
+        errBox.textContent = 'من فضلك أدخل اسمك الكامل (حرفين على الأقل).';
+        errBox.classList.remove('hidden');
+        return;
+      }
+      if (isNaN(age) || age < 6 || age > 99) {
+        errBox.textContent = 'من فضلك أدخل عمراً صحيحاً بين 6 و 99 سنة.';
+        errBox.classList.remove('hidden');
+        return;
+      }
+
+      errBox.classList.add('hidden');
+      state.studentName = name;
+      state.studentAge = age;
+      state.startTime = Date.now();
+      state.questionIndex = 0;
+      state.currentTier = 0; // Always start from A1 in Auto mode
+      state.streakCorrect = 0;
+      state.abilityIndex = 0.8;
+      state.usedIds.clear();
+      state.answers = [];
+      state.skillStats = {
+        Vocabulary: { correct: 0, total: 0 },
+        Grammar: { correct: 0, total: 0 },
+        Reading: { correct: 0, total: 0 },
+        Listening: { correct: 0, total: 0 }
+      };
+
+      $('header-student-name').textContent = `${name} • ${age} سنة`;
+      $('header-badge').classList.remove('hidden');
+      $('header-badge').classList.add('flex');
+
+      showScreen('screen-quiz');
+      renderQuestion();
+    });
+
+    $('btn-next').addEventListener('click', submitAnswerAndAdvance);
+    $('btn-retry-sync').addEventListener('click', () => {
+      if (state.lastPayload) syncToGoogleSheets(state.lastPayload);
+    });
+    $('btn-print').addEventListener('click', () => window.print());
+    $('btn-retake').addEventListener('click', () => {
+      $('header-badge').classList.add('hidden');
+      $('header-badge').classList.remove('flex');
+      showScreen('screen-welcome');
+    });
+
+    // Keyboard shortcuts 1-4 & Enter inside Quiz
+    document.addEventListener('keydown', (e) => {
+      if ($('screen-quiz').classList.contains('hidden')) return;
+      if (['1', '2', '3', '4'].includes(e.key)) {
+        const idx = parseInt(e.key, 10) - 1;
+        const btns = $('q-options').querySelectorAll('button');
+        if (btns[idx]) selectOption(idx, btns[idx]);
+      } else if (e.key === 'Enter' && state.selectedOption !== null) {
+        submitAnswerAndAdvance();
+      }
+    });
+  </script>
+</body>
+</html>
