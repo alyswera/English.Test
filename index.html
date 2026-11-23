@@ -11,14 +11,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg-canvas: #F6F8FB;
-      --brand-blue: #2563EB;
-      --brand-blue-dark: #1D4ED8;
-    }
     body {
       font-family: 'Cairo', 'Inter', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg-canvas);
+      background-color: #F4F9FD;
       min-height: 100vh;
     }
     .font-en {
@@ -26,7 +21,6 @@
       direction: ltr;
       text-align: left;
     }
-
     @keyframes slideUpFade {
       from { opacity: 0; transform: translateY(14px); }
       to { opacity: 1; transform: translateY(0); }
@@ -39,68 +33,27 @@
       0%, 100% { transform: scaleY(0.35); }
       50% { transform: scaleY(1); }
     }
-
-    .animate-slide { animation: slideUpFade 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-    .animate-tile { animation: tilePop 0.22s ease-out backwards; }
-
-    .tactile-btn {
-      transition: transform 0.12s ease, background-color 0.15s ease, box-shadow 0.15s ease;
-    }
+    .animate-slide { animation: slideUpFade 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .animate-tile { animation: tilePop 0.2s ease-out backwards; }
+    .tactile-btn { transition: transform 0.12s ease, background-color 0.15s ease; }
     .tactile-btn:active { transform: translateY(2px); }
-
-    .choice-card {
-      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
-    }
-    .choice-card:hover {
-      transform: translateY(-2px);
-      border-color: #93C5FD;
-      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.08);
-    }
-    .choice-selected {
-      border-color: #2563EB !important;
-      background-color: #EFF6FF !important;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
-    }
-    .choice-selected .choice-badge {
-      background-color: #2563EB !important;
-      color: #FFFFFF !important;
-    }
-
-    .mode-tab-active {
-      border-color: #2563EB !important;
-      background-color: #EFF6FF !important;
-      color: #1E3A8A !important;
-    }
-    .level-pill-active {
-      background-color: #2563EB !important;
-      color: #FFFFFF !important;
-      border-color: #1D4ED8 !important;
-    }
-
-    .wave-bar {
-      transform-origin: bottom;
-      animation: pulseBar 0.75s ease-in-out infinite;
-    }
-    .wave-paused .wave-bar {
-      animation-play-state: paused;
-      transform: scaleY(0.35);
-    }
-
-    @media print {
-      .no-print { display: none !important; }
-      body { background: #FFFFFF !important; }
-    }
+    .choice-card { transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease; }
+    .choice-card:hover { transform: translateY(-2px); border-color: #7DD3FC; box-shadow: 0 6px 16px rgba(37, 99, 235, 0.08); }
+    .choice-selected { border-color: #00A0E9 !important; background-color: #F0F9FF !important; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18); }
+    .choice-selected .choice-badge { background-color: #00A0E9 !important; color: #FFFFFF !important; }
+    .mode-tab-active { border-color: #00A0E9 !important; background-color: #F0F9FF !important; color: #1E3A8A !important; }
+    .level-pill-active { background-color: #00A0E9 !important; color: #FFFFFF !important; border-color: #0284C7 !important; }
+    .wave-bar { transform-origin: bottom; animation: pulseBar 0.75s ease-in-out infinite; }
+    .wave-paused .wave-bar { animation-play-state: paused; transform: scaleY(0.35); }
+    @media print { .no-print { display: none !important; } body { background: #FFFFFF !important; } }
   </style>
 </head>
 <body class="text-slate-800 antialiased">
 
-  <!-- Minimal Clean Header -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-30 no-print">
     <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
       <div class="flex items-center gap-2.5">
-        <div class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-en font-extrabold text-sm">
-          EN
-        </div>
+        <div class="w-9 h-9 rounded-xl bg-[#FFD100] text-slate-900 flex items-center justify-center font-en font-extrabold text-sm">EN</div>
         <span class="text-sm sm:text-base font-extrabold text-slate-900">اختبار تحديد مستوى اللغة الإنجليزية</span>
       </div>
       <span id="header-student-pill" class="hidden text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1.5 rounded-full"></span>
@@ -113,8 +66,8 @@
     <section id="screen-welcome" class="animate-slide bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
       <div class="p-6 sm:p-8 border-b border-slate-100 bg-slate-50/60">
         <div class="flex items-center gap-2 mb-2">
-          <span class="font-en text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-blue-100 text-blue-700">CEFR Standard</span>
-          <span class="font-en text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-800">A1 – C1 (Sub-levels 1–3)</span>
+          <span class="font-en text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-[#FEF3C7] text-amber-900">CEFR Standard</span>
+          <span class="font-en text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-800">30 Interactive Questions</span>
         </div>
         <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">مرحباً بك في اختبار اللغة الإنجليزية التفاعلي</h1>
         <p class="text-sm text-slate-600 mt-1.5 leading-relaxed">
@@ -123,38 +76,32 @@
       </div>
 
       <form id="start-form" class="p-6 sm:p-8 space-y-6">
-        <!-- Student Info -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="sm:col-span-2">
             <label for="student-name" class="block text-xs font-bold text-slate-700 mb-1.5">اسم الطالب</label>
             <input id="student-name" type="text" placeholder="اكتب اسمك الكامل"
-              class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-slate-900 font-semibold" />
+              class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 font-semibold" />
           </div>
           <div>
             <label for="student-age" class="block text-xs font-bold text-slate-700 mb-1.5">العمر</label>
             <input id="student-age" type="number" min="6" max="99" placeholder="مثال: 13"
-              class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-slate-900 font-semibold" />
+              class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 font-semibold" />
           </div>
         </div>
 
-        <!-- Mode Selector -->
         <div class="space-y-3">
           <label class="block text-xs font-bold text-slate-700">اختر نظام الاختبار</label>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <button id="mode-auto-btn" type="button"
-              class="mode-tab-active text-right p-4 rounded-2xl border-2 border-slate-200 bg-white cursor-pointer transition">
+            <button id="mode-auto-btn" type="button" class="mode-tab-active text-right p-4 rounded-2xl border-2 border-slate-200 bg-white cursor-pointer transition">
               <p class="text-sm font-extrabold text-slate-900">اختبار شامل (تحديد المستوى تلقائياً)</p>
-              <p class="text-xs text-slate-500 mt-1 leading-relaxed">يبدأ من <span class="font-en font-bold">A1</span> وتزداد الصعوبة تدريجياً (15 سؤالاً).</p>
+              <p class="text-xs text-slate-500 mt-1 leading-relaxed">يبدأ من <span class="font-en font-bold">A1</span> وتزداد الصعوبة تدريجياً (30 سؤالاً).</p>
             </button>
-
-            <button id="mode-manual-btn" type="button"
-              class="text-right p-4 rounded-2xl border-2 border-slate-200 bg-white cursor-pointer transition">
+            <button id="mode-manual-btn" type="button" class="text-right p-4 rounded-2xl border-2 border-slate-200 bg-white cursor-pointer transition">
               <p class="text-sm font-extrabold text-slate-900">اختيار مستوى محدد يدوياً</p>
-              <p class="text-xs text-slate-500 mt-1 leading-relaxed">تظهر أسئلة خاصة بالمستوى الذي تختاره فقط (6 أسئلة).</p>
+              <p class="text-xs text-slate-500 mt-1 leading-relaxed">30 سؤالاً متنوعة خاصة بالمستوى الذي تختاره فقط.</p>
             </button>
           </div>
 
-          <!-- Manual Level Picker -->
           <div id="manual-level-box" class="hidden animate-slide bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2.5">
             <p class="text-xs font-bold text-slate-700">حدد المستوى المطلوب:</p>
             <div class="grid grid-cols-5 gap-2 font-en">
@@ -164,27 +111,25 @@
               <button type="button" data-level="B2" class="level-pill py-2.5 rounded-xl border border-slate-300 bg-white font-extrabold text-sm cursor-pointer transition">B2</button>
               <button type="button" data-level="C1" class="level-pill py-2.5 rounded-xl border border-slate-300 bg-white font-extrabold text-sm cursor-pointer transition">C1</button>
             </div>
-            <p id="manual-level-hint" class="text-xs text-blue-700 font-bold">المستوى المختار: A1 (Beginner)</p>
+            <p id="manual-level-hint" class="text-xs text-[#0284C7] font-bold">المستوى المختار: A1 (Beginner)</p>
           </div>
         </div>
 
         <div id="form-error" class="hidden text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-4 py-2.5 font-bold"></div>
 
-        <button type="submit"
-          class="tactile-btn w-full py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 border-b-4 border-blue-800 text-white font-extrabold text-base cursor-pointer">
+        <button type="submit" class="tactile-btn w-full py-3.5 rounded-2xl bg-[#00A0E9] hover:bg-[#0284C7] border-b-4 border-[#0369A1] text-white font-extrabold text-base cursor-pointer">
           ابدأ الاختبار الآن &larr;
         </button>
       </form>
     </section>
 
-    <!-- ==================== SCREEN 2: QUIZ (DISTRACTION-FREE) ==================== -->
+    <!-- ==================== SCREEN 2: QUIZ ==================== -->
     <section id="screen-quiz" class="hidden space-y-4">
-      <!-- Clean Progress Bar -->
       <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm space-y-2.5">
         <div class="flex items-center justify-between gap-2 text-xs sm:text-sm">
           <div class="flex items-center gap-2">
             <span id="q-counter" class="font-extrabold text-slate-900"></span>
-            <span id="q-skill-badge" class="font-en text-xs font-bold px-2 py-0.5 rounded-md bg-blue-50 text-blue-700"></span>
+            <span id="q-skill-badge" class="font-en text-xs font-bold px-2 py-0.5 rounded-md bg-[#E0F2FE] text-[#0369A1]"></span>
           </div>
           <div class="flex items-center gap-2">
             <span id="q-remaining" class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full"></span>
@@ -192,31 +137,24 @@
           </div>
         </div>
         <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
-          <div id="q-progress-bar" class="h-full bg-blue-600 rounded-full transition-all duration-500 ease-out" style="width: 7%"></div>
+          <div id="q-progress-bar" class="h-full bg-blue-600 rounded-full transition-all duration-500 ease-out" style="width: 3%"></div>
         </div>
       </div>
 
-      <!-- Focused Question Card -->
       <div id="question-card" class="animate-slide bg-white rounded-3xl border border-slate-200 shadow-sm p-5 sm:p-8 space-y-6">
         <div class="space-y-1.5">
-          <p id="q-instruction-ar" class="text-xs sm:text-sm font-bold text-blue-600"></p>
+          <p id="q-instruction-ar" class="text-xs sm:text-sm font-bold text-[#00A0E9]"></p>
           <h2 id="q-prompt" class="font-en text-lg sm:text-xl font-bold text-slate-900 leading-snug"></h2>
         </div>
 
-        <!-- Audio Player (for Listening & Listen-Pick-Image) -->
         <div id="q-audio-box" class="hidden bg-slate-50 border border-slate-200 rounded-2xl p-4"></div>
-
-        <!-- Context Visual Card (for Reading / Charts / Notices) -->
         <div id="q-context-box" class="hidden"></div>
-
-        <!-- Dynamic Interactive Area (MCQ / Image Grid / Multi-Select / Sentence Builder) -->
         <div id="q-interactive-area"></div>
 
         <div id="quiz-error" class="hidden text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-4 py-2.5 font-bold text-center"></div>
 
         <div class="flex items-center justify-end pt-3 border-t border-slate-100">
-          <button id="btn-next" type="button"
-            class="tactile-btn w-full sm:w-auto px-8 py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 border-b-4 border-blue-800 text-white font-extrabold text-sm sm:text-base cursor-pointer">
+          <button id="btn-next" type="button" class="tactile-btn w-full sm:w-auto px-8 py-3 rounded-2xl bg-[#00A0E9] hover:bg-[#0284C7] border-b-4 border-[#0369A1] text-white font-extrabold text-sm sm:text-base cursor-pointer">
             السؤال التالي &larr;
           </button>
         </div>
@@ -225,33 +163,18 @@
 
     <!-- ==================== SCREEN 3: RESULTS ==================== -->
     <section id="screen-results" class="hidden space-y-5">
-      <!-- Sync Status -->
-      <div id="sync-banner" class="animate-slide rounded-2xl p-4 border flex flex-wrap items-center justify-between gap-3 no-print">
-        <div class="flex items-center gap-3">
-          <div id="sync-icon" class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold"></div>
-          <div>
-            <p id="sync-title" class="text-sm font-bold"></p>
-            <p id="sync-subtitle" class="text-xs opacity-80"></p>
-          </div>
-        </div>
-        <button id="btn-retry-sync" type="button" class="hidden px-4 py-1.5 rounded-lg bg-white border border-slate-300 text-xs font-bold hover:bg-slate-50 cursor-pointer">
-          إعادة المحاولة
-        </button>
-      </div>
-
-      <!-- Result Card -->
       <div class="animate-slide bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="bg-slate-900 text-white p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <div class="bg-gradient-to-l from-[#0284C7] to-[#00A0E9] text-white p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div class="space-y-2">
-            <span id="res-mode-badge" class="inline-block text-xs font-bold bg-blue-600 text-white px-3 py-1 rounded-full"></span>
+            <span id="res-mode-badge" class="inline-block text-xs font-bold bg-[#FFD100] text-slate-900 px-3 py-1 rounded-full"></span>
             <h2 id="res-student-heading" class="text-2xl sm:text-3xl font-extrabold"></h2>
             <p id="res-level-desc" class="text-slate-300 text-sm leading-relaxed max-w-lg"></p>
           </div>
-          <div class="shrink-0 bg-slate-800 border border-slate-700 rounded-2xl p-5 text-center min-w-[175px]">
-            <p class="text-xs text-slate-400 font-bold mb-1">المستوى الدقيق</p>
-            <div id="res-cefr-code" class="font-en text-4xl font-black text-white"></div>
-            <div id="res-sublevel-badge" class="font-en mt-1.5 inline-block text-xs font-extrabold px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-900"></div>
-            <p id="res-cefr-title" class="font-en text-xs text-slate-300 mt-1.5"></p>
+          <!-- Prominent Sub-Level Box -->
+          <div class="shrink-0 bg-white/15 backdrop-blur border border-white/25 rounded-2xl p-5 text-center min-w-[190px]">
+            <p class="text-xs text-sky-100 font-bold mb-1">المستوى الدقيق</p>
+            <div id="res-sublevel-big" class="font-en text-4xl sm:text-5xl font-black text-[#FFD100] tracking-tight"></div>
+            <div id="res-cefr-badge" class="font-en mt-2 inline-block text-sm font-extrabold px-3 py-1 rounded-lg bg-white text-slate-900"></div>
           </div>
         </div>
 
@@ -259,7 +182,7 @@
           <div class="grid grid-cols-3 gap-3">
             <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 text-center">
               <p class="text-xs text-slate-500 font-bold mb-1">الدقة الكلية</p>
-              <p id="res-accuracy" class="font-en text-2xl font-extrabold text-blue-600"></p>
+              <p id="res-accuracy" class="font-en text-2xl font-extrabold text-[#00A0E9]"></p>
             </div>
             <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 text-center">
               <p class="text-xs text-slate-500 font-bold mb-1">مؤشر القدرة</p>
@@ -274,9 +197,7 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200">
               <h3 class="text-sm font-extrabold text-slate-800 mb-3 text-center">أداؤك حسب المهارات</h3>
-              <div class="relative h-60">
-                <canvas id="skills-chart"></canvas>
-              </div>
+              <div class="relative h-60"><canvas id="skills-chart"></canvas></div>
             </div>
             <div class="space-y-3">
               <h3 class="text-base font-extrabold text-slate-900">خطوتك القادمة</h3>
@@ -285,12 +206,10 @@
           </div>
 
           <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100 no-print">
-            <button id="btn-print" type="button"
-              class="tactile-btn px-5 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-bold text-sm cursor-pointer">
+            <button id="btn-print" type="button" class="tactile-btn px-5 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-bold text-sm cursor-pointer">
               طباعة النتيجة
             </button>
-            <button id="btn-retake" type="button"
-              class="tactile-btn px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 border-b-4 border-blue-800 text-white font-extrabold text-sm cursor-pointer">
+            <button id="btn-retake" type="button" class="tactile-btn px-6 py-2.5 rounded-xl bg-[#00A0E9] hover:bg-[#0284C7] border-b-4 border-[#0369A1] text-white font-extrabold text-sm cursor-pointer">
               إجراء اختبار جديد
             </button>
           </div>
@@ -301,379 +220,15 @@
   </main>
 
   <script>
-    // =========================================================================
-    // 1. CONFIGURATION
-    // =========================================================================
     const DEPLOYMENT_ID = 'AKfycbyu9hgcCKJxkFIZ0Xbq7w2v1OagiRTPuz3zOinVMuiGE4TyBfrXmgJPM8BBGK7dG_XNJg';
     const APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DEPLOYMENT_ID}/exec`;
-    const AUTO_TOTAL_QUESTIONS = 15;
-    const MANUAL_TOTAL_QUESTIONS = 6;
+    const TOTAL_QUESTIONS = 30;
     const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1'];
 
-    // =========================================================================
-    // 2. CRISP ILLUSTRATED OBJECTS (Clean Flat Editorial SVGs)
-    // =========================================================================
-    const PICS = {
-      apple: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><path d="M40 22 C40 12 48 10 52 12" stroke="#15803D" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="48" cy="17" rx="7" ry="4" fill="#22C55E" transform="rotate(-20 48 17)"/><path d="M40 24 C24 20 14 34 18 52 C21 66 31 70 40 66 C49 70 59 66 62 52 C66 34 56 20 40 24 Z" fill="#EF4444"/><ellipse cx="29" cy="36" rx="3.5" ry="7" fill="#FCA5A5" opacity="0.6" transform="rotate(15 29 36)"/></svg>`,
-      book: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><rect x="16" y="16" width="44" height="50" rx="5" fill="#2563EB"/><rect x="22" y="16" width="40" height="50" rx="4" fill="#3B82F6"/><rect x="26" y="24" width="28" height="10" rx="2" fill="#DBEAFE"/><rect x="20" y="56" width="42" height="8" rx="3" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/></svg>`,
-      backpack: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><path d="M28 24 C28 14 52 14 52 24" stroke="#B45309" stroke-width="4" fill="none"/><rect x="20" y="22" width="40" height="44" rx="10" fill="#F59E0B"/><rect x="26" y="40" width="28" height="18" rx="5" fill="#D97706"/><line x1="26" y1="34" x2="54" y2="34" stroke="#FEF3C7" stroke-width="2.5" stroke-linecap="round"/></svg>`,
-      pencil: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><g transform="rotate(35 40 40)"><rect x="33" y="14" width="14" height="40" rx="2" fill="#FBBF24"/><rect x="33" y="14" width="14" height="8" rx="2" fill="#F43F5E"/><polygon points="33,54 47,54 40,68" fill="#FDE68A"/><polygon points="38,63 42,63 40,68" fill="#1E293B"/></g></svg>`,
-      bicycle: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><circle cx="22" cy="52" r="12" fill="none" stroke="#334155" stroke-width="3.5"/><circle cx="58" cy="52" r="12" fill="none" stroke="#334155" stroke-width="3.5"/><path d="M22 52 L36 34 L52 34 L58 52 M36 34 L42 52 L22 52" fill="none" stroke="#2563EB" stroke-width="3" stroke-linejoin="round"/><line x1="33" y1="30" x2="40" y2="30" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round"/></svg>`,
-      train: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><rect x="20" y="14" width="40" height="44" rx="8" fill="#0F172A"/><rect x="25" y="20" width="30" height="18" rx="4" fill="#38BDF8"/><circle cx="29" cy="48" r="3.5" fill="#FBBF24"/><circle cx="51" cy="48" r="3.5" fill="#FBBF24"/><line x1="24" y1="66" x2="18" y2="72" stroke="#64748B" stroke-width="3" stroke-linecap="round"/><line x1="56" y1="66" x2="62" y2="72" stroke="#64748B" stroke-width="3" stroke-linecap="round"/></svg>`,
-      plane: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><path d="M12 42 L34 38 L44 16 L50 16 L46 38 L64 38 L68 32 L72 32 L68 42 L72 52 L68 52 L64 46 L46 46 L50 66 L44 66 L34 46 L12 42 Z" fill="#0284C7"/></svg>`,
-      bus: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><rect x="14" y="20" width="52" height="36" rx="7" fill="#F59E0B"/><rect x="20" y="26" width="18" height="14" rx="2" fill="#E0F2FE"/><rect x="42" y="26" width="18" height="14" rx="2" fill="#E0F2FE"/><circle cx="25" cy="58" r="6" fill="#1E293B"/><circle cx="55" cy="58" r="6" fill="#1E293B"/></svg>`,
-      umbrella: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><path d="M14 42 C14 24 66 24 66 42 Z" fill="#6366F1"/><path d="M40 42 L40 60 C40 65 34 65 34 60" stroke="#334155" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>`,
-      sunglasses: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><rect x="12" y="32" width="24" height="16" rx="5" fill="#0F172A"/><rect x="44" y="32" width="24" height="16" rx="5" fill="#0F172A"/><line x1="36" y1="38" x2="44" y2="38" stroke="#0F172A" stroke-width="3"/><line x1="16" y1="36" x2="22" y2="42" stroke="#38BDF8" stroke-width="2" opacity="0.6"/></svg>`,
-      carrot: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><path d="M46 24 L56 14 M46 24 L48 12 M46 24 L58 22" stroke="#16A34A" stroke-width="3" stroke-linecap="round"/><path d="M44 22 C52 24 52 34 42 46 L22 64 C20 66 18 64 20 60 L34 36 C38 26 40 22 44 22 Z" fill="#F97316"/></svg>`,
-      burger: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><path d="M18 36 C18 20 62 20 62 36 Z" fill="#F59E0B"/><rect x="16" y="38" width="48" height="6" rx="3" fill="#16A34A"/><rect x="16" y="45" width="48" height="8" rx="3" fill="#78350F"/><rect x="18" y="55" width="44" height="9" rx="4" fill="#D97706"/></svg>`,
-      banana: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><path d="M20 56 C32 62 56 50 58 22 C58 18 54 18 52 22 C48 42 32 50 20 50 C16 50 16 54 20 56 Z" fill="#FACC15" stroke="#CA8A04" stroke-width="2"/></svg>`,
-      camera: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><rect x="14" y="26" width="52" height="34" rx="7" fill="#334155"/><rect x="30" y="18" width="20" height="8" rx="3" fill="#475569"/><circle cx="40" cy="43" r="11" fill="#E2E8F0"/><circle cx="40" cy="43" r="6" fill="#0284C7"/></svg>`,
-      noSmoking: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><circle cx="40" cy="40" r="26" fill="#FEE2E2" stroke="#DC2626" stroke-width="5"/><rect x="22" y="37" width="32" height="6" fill="#334155"/><line x1="22" y1="22" x2="58" y2="58" stroke="#DC2626" stroke-width="5"/></svg>`,
-      noParking: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><circle cx="40" cy="40" r="26" fill="#EFF6FF" stroke="#DC2626" stroke-width="5"/><text x="40" y="50" text-anchor="middle" font-family="Inter,sans-serif" font-size="30" font-weight="800" fill="#1E293B">P</text><line x1="22" y1="22" x2="58" y2="58" stroke="#DC2626" stroke-width="5"/></svg>`,
-      wifi: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><path d="M16 34 C30 20 50 20 64 34" stroke="#2563EB" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M25 44 C34 35 46 35 55 44" stroke="#2563EB" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="40" cy="56" r="4.5" fill="#2563EB"/></svg>`,
-      exitSign: `<svg viewBox="0 0 80 80" class="w-16 h-16 mx-auto"><rect x="12" y="24" width="56" height="32" rx="6" fill="#16A34A"/><text x="40" y="46" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" font-weight="800" fill="#FFFFFF">EXIT</text></svg>`
-    };
+    const PICS = {"apple": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><path d=\"M40 22 C40 12 48 10 52 12\" stroke=\"#15803D\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"48\" cy=\"17\" rx=\"7\" ry=\"4\" fill=\"#22C55E\" transform=\"rotate(-20 48 17)\"/><path d=\"M40 24 C24 20 14 34 18 52 C21 66 31 70 40 66 C49 70 59 66 62 52 C66 34 56 20 40 24 Z\" fill=\"#EF4444\"/></svg>", "book": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><rect x=\"16\" y=\"16\" width=\"44\" height=\"50\" rx=\"5\" fill=\"#2563EB\"/><rect x=\"22\" y=\"16\" width=\"40\" height=\"50\" rx=\"4\" fill=\"#3B82F6\"/><rect x=\"26\" y=\"24\" width=\"28\" height=\"10\" rx=\"2\" fill=\"#DBEAFE\"/><rect x=\"20\" y=\"56\" width=\"42\" height=\"8\" rx=\"3\" fill=\"#F8FAFC\"/></svg>", "backpack": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><path d=\"M28 24 C28 14 52 14 52 24\" stroke=\"#B45309\" stroke-width=\"4\" fill=\"none\"/><rect x=\"20\" y=\"22\" width=\"40\" height=\"44\" rx=\"10\" fill=\"#F59E0B\"/><rect x=\"26\" y=\"40\" width=\"28\" height=\"18\" rx=\"5\" fill=\"#D97706\"/></svg>", "pencil": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><g transform=\"rotate(35 40 40)\"><rect x=\"33\" y=\"14\" width=\"14\" height=\"40\" rx=\"2\" fill=\"#FBBF24\"/><rect x=\"33\" y=\"14\" width=\"14\" height=\"8\" rx=\"2\" fill=\"#F43F5E\"/><polygon points=\"33,54 47,54 40,68\" fill=\"#FDE68A\"/><polygon points=\"38,63 42,63 40,68\" fill=\"#1E293B\"/></g></svg>", "bicycle": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><circle cx=\"22\" cy=\"52\" r=\"12\" fill=\"none\" stroke=\"#334155\" stroke-width=\"3.5\"/><circle cx=\"58\" cy=\"52\" r=\"12\" fill=\"none\" stroke=\"#334155\" stroke-width=\"3.5\"/><path d=\"M22 52 L36 34 L52 34 L58 52 M36 34 L42 52 L22 52\" fill=\"none\" stroke=\"#2563EB\" stroke-width=\"3\"/></svg>", "train": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><rect x=\"20\" y=\"14\" width=\"40\" height=\"44\" rx=\"8\" fill=\"#0F172A\"/><rect x=\"25\" y=\"20\" width=\"30\" height=\"18\" rx=\"4\" fill=\"#38BDF8\"/><circle cx=\"29\" cy=\"48\" r=\"3.5\" fill=\"#FBBF24\"/><circle cx=\"51\" cy=\"48\" r=\"3.5\" fill=\"#FBBF24\"/></svg>", "plane": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><path d=\"M12 42 L34 38 L44 16 L50 16 L46 38 L64 38 L68 32 L72 32 L68 42 L72 52 L68 52 L64 46 L46 46 L50 66 L44 66 L34 46 L12 42 Z\" fill=\"#0284C7\"/></svg>", "bus": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><rect x=\"14\" y=\"20\" width=\"52\" height=\"36\" rx=\"7\" fill=\"#F59E0B\"/><rect x=\"20\" y=\"26\" width=\"18\" height=\"14\" rx=\"2\" fill=\"#E0F2FE\"/><rect x=\"42\" y=\"26\" width=\"18\" height=\"14\" rx=\"2\" fill=\"#E0F2FE\"/><circle cx=\"25\" cy=\"58\" r=\"6\" fill=\"#1E293B\"/><circle cx=\"55\" cy=\"58\" r=\"6\" fill=\"#1E293B\"/></svg>", "umbrella": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><path d=\"M14 42 C14 24 66 24 66 42 Z\" fill=\"#6366F1\"/><path d=\"M40 42 L40 60 C40 65 34 65 34 60\" stroke=\"#334155\" stroke-width=\"3.5\" fill=\"none\" stroke-linecap=\"round\"/></svg>", "sunglasses": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><rect x=\"12\" y=\"32\" width=\"24\" height=\"16\" rx=\"5\" fill=\"#0F172A\"/><rect x=\"44\" y=\"32\" width=\"24\" height=\"16\" rx=\"5\" fill=\"#0F172A\"/><line x1=\"36\" y1=\"38\" x2=\"44\" y2=\"38\" stroke=\"#0F172A\" stroke-width=\"3\"/></svg>", "carrot": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><path d=\"M46 24 L56 14 M46 24 L48 12\" stroke=\"#16A34A\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M44 22 C52 24 52 34 42 46 L22 64 C20 66 18 64 20 60 L34 36 C38 26 40 22 44 22 Z\" fill=\"#F97316\"/></svg>", "burger": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><path d=\"M18 36 C18 20 62 20 62 36 Z\" fill=\"#F59E0B\"/><rect x=\"16\" y=\"38\" width=\"48\" height=\"6\" rx=\"3\" fill=\"#16A34A\"/><rect x=\"16\" y=\"45\" width=\"48\" height=\"8\" rx=\"3\" fill=\"#78350F\"/><rect x=\"18\" y=\"55\" width=\"44\" height=\"9\" rx=\"4\" fill=\"#D97706\"/></svg>", "banana": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><path d=\"M20 56 C32 62 56 50 58 22 C58 18 54 18 52 22 C48 42 32 50 20 50 C16 50 16 54 20 56 Z\" fill=\"#FACC15\" stroke=\"#CA8A04\" stroke-width=\"2\"/></svg>", "camera": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><rect x=\"14\" y=\"26\" width=\"52\" height=\"34\" rx=\"7\" fill=\"#334155\"/><rect x=\"30\" y=\"18\" width=\"20\" height=\"8\" rx=\"3\" fill=\"#475569\"/><circle cx=\"40\" cy=\"43\" r=\"11\" fill=\"#E2E8F0\"/><circle cx=\"40\" cy=\"43\" r=\"6\" fill=\"#0284C7\"/></svg>", "noSmoking": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><circle cx=\"40\" cy=\"40\" r=\"26\" fill=\"#FEE2E2\" stroke=\"#DC2626\" stroke-width=\"5\"/><rect x=\"22\" y=\"37\" width=\"32\" height=\"6\" fill=\"#334155\"/><line x1=\"22\" y1=\"22\" x2=\"58\" y2=\"58\" stroke=\"#DC2626\" stroke-width=\"5\"/></svg>", "noParking": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><circle cx=\"40\" cy=\"40\" r=\"26\" fill=\"#EFF6FF\" stroke=\"#DC2626\" stroke-width=\"5\"/><text x=\"40\" y=\"50\" text-anchor=\"middle\" font-family=\"Inter,sans-serif\" font-size=\"30\" font-weight=\"800\" fill=\"#1E293B\">P</text><line x1=\"22\" y1=\"22\" x2=\"58\" y2=\"58\" stroke=\"#DC2626\" stroke-width=\"5\"/></svg>", "wifi": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><path d=\"M16 34 C30 20 50 20 64 34\" stroke=\"#2563EB\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M25 44 C34 35 46 35 55 44\" stroke=\"#2563EB\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"40\" cy=\"56\" r=\"4.5\" fill=\"#2563EB\"/></svg>", "exitSign": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><rect x=\"12\" y=\"24\" width=\"56\" height=\"32\" rx=\"6\" fill=\"#16A34A\"/><text x=\"40\" y=\"46\" text-anchor=\"middle\" font-family=\"Inter,sans-serif\" font-size=\"16\" font-weight=\"800\" fill=\"#FFFFFF\">EXIT</text></svg>", "clock": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><circle cx=\"40\" cy=\"40\" r=\"26\" fill=\"#FFFFFF\" stroke=\"#2563EB\" stroke-width=\"4\"/><line x1=\"40\" y1=\"40\" x2=\"40\" y2=\"23\" stroke=\"#1E293B\" stroke-width=\"3.5\" stroke-linecap=\"round\"/><line x1=\"40\" y1=\"40\" x2=\"54\" y2=\"40\" stroke=\"#EF4444\" stroke-width=\"2.5\" stroke-linecap=\"round\"/></svg>", "sun": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><circle cx=\"40\" cy=\"40\" r=\"15\" fill=\"#FBBF24\"/><path d=\"M40 12 V20 M40 60 V68 M12 40 H20 M60 40 H68 M20 20 L26 26 M54 54 L60 60 M60 20 L54 26 M26 54 L20 60\" stroke=\"#F59E0B\" stroke-width=\"3.5\" stroke-linecap=\"round\"/></svg>", "laptop": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><rect x=\"18\" y=\"20\" width=\"44\" height=\"30\" rx=\"4\" fill=\"#1E293B\"/><rect x=\"22\" y=\"24\" width=\"36\" height=\"22\" rx=\"2\" fill=\"#38BDF8\"/><path d=\"M10 54 H70 L64 62 H16 Z\" fill=\"#64748B\"/></svg>", "coffee": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><rect x=\"20\" y=\"30\" width=\"32\" height=\"30\" rx=\"5\" fill=\"#78350F\"/><path d=\"M52 36 H58 C62 36 62 48 58 48 H52\" stroke=\"#78350F\" stroke-width=\"4\" fill=\"none\"/><path d=\"M28 22 Q30 16 28 12 M38 22 Q40 16 38 12\" stroke=\"#94A3B8\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\"/></svg>", "shirt": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><path d=\"M26 18 L14 28 L22 36 L26 32 V62 H54 V32 L58 36 L66 28 L54 18 L46 22 H34 Z\" fill=\"#3B82F6\"/></svg>", "key": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><circle cx=\"26\" cy=\"40\" r=\"11\" fill=\"none\" stroke=\"#D97706\" stroke-width=\"5\"/><line x1=\"37\" y1=\"40\" x2=\"66\" y2=\"40\" stroke=\"#D97706\" stroke-width=\"5\" stroke-linecap=\"round\"/><line x1=\"56\" y1=\"40\" x2=\"56\" y2=\"50\" stroke=\"#D97706\" stroke-width=\"4\"/><line x1=\"64\" y1=\"40\" x2=\"64\" y2=\"48\" stroke=\"#D97706\" stroke-width=\"4\"/></svg>", "globe": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><circle cx=\"40\" cy=\"40\" r=\"24\" fill=\"#DBEAFE\" stroke=\"#2563EB\" stroke-width=\"3\"/><ellipse cx=\"40\" cy=\"40\" rx=\"11\" ry=\"24\" fill=\"none\" stroke=\"#2563EB\" stroke-width=\"2.5\"/><line x1=\"16\" y1=\"40\" x2=\"64\" y2=\"40\" stroke=\"#2563EB\" stroke-width=\"2.5\"/></svg>", "headphones": "<svg viewBox=\"0 0 80 80\" class=\"w-14 h-14 mx-auto\"><path d=\"M20 44 C20 26 60 26 60 44\" stroke=\"#1E293B\" stroke-width=\"5\" fill=\"none\"/><rect x=\"14\" y=\"42\" width=\"10\" height=\"20\" rx=\"4\" fill=\"#2563EB\"/><rect x=\"56\" y=\"42\" width=\"10\" height=\"20\" rx=\"4\" fill=\"#2563EB\"/></svg>"};
+    const CONTEXT_CARDS = {"cafeMenu": "<div class=\"font-en max-w-md mx-auto bg-amber-50 border border-amber-200 rounded-2xl p-4\"><div class=\"flex justify-between border-b border-amber-200 pb-2 mb-2\"><span class=\"font-bold text-amber-900 text-sm\">SUNNY CAFE</span><span class=\"text-xs bg-amber-200 text-amber-900 px-2 py-0.5 rounded font-semibold\">8 AM – 6 PM</span></div><div class=\"space-y-1 text-xs sm:text-sm text-slate-700\"><div class=\"flex justify-between\"><span>Hot Coffee</span><span class=\"font-bold\">$3.00</span></div><div class=\"flex justify-between\"><span>Cheese Sandwich</span><span class=\"font-bold\">$4.50</span></div></div><p class=\"mt-2 text-xs font-bold text-amber-800\">* Closed on Sundays</p></div>", "smsCard": "<div class=\"font-en max-w-md mx-auto bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-1.5\"><p class=\"text-xs font-bold text-slate-500\">SMS from Sara (10:15 AM)</p><p class=\"text-sm text-slate-800\">\"Hi! The science museum is closed for repairs today, so our school trip is moved to <strong>Thursday morning</strong>. Bring your notebook!\"</p></div>", "libraryCard": "<div class=\"font-en max-w-md mx-auto bg-blue-50 border border-blue-200 rounded-2xl p-4 text-xs sm:text-sm text-slate-700\"><p class=\"font-bold text-blue-900 mb-1\">CITY LIBRARY RULES</p><p>Open Mon–Sat, 9 AM to 7 PM. Students may borrow up to 4 books for two weeks. Please keep phones on silent.</p></div>", "gymNotice": "<div class=\"font-en max-w-md mx-auto bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-xs sm:text-sm text-slate-700\"><p class=\"font-bold text-emerald-900 mb-1\">COMMUNITY POOL NOTICE</p><p>Next Monday, the pool closes early at 8:00 PM for cleaning. Evening swimmers can use the Oak Street branch for free.</p></div>", "chartCard": "<div class=\"flex justify-center\"><svg viewBox=\"0 0 340 150\" class=\"w-full max-w-sm h-auto rounded-2xl bg-slate-50 p-3 border border-slate-200\"><text x=\"170\" y=\"18\" text-anchor=\"middle\" font-family=\"Inter,sans-serif\" font-size=\"11\" font-weight=\"700\" fill=\"#1E293B\">Monthly Electricity Usage (kWh)</text><line x1=\"40\" y1=\"122\" x2=\"310\" y2=\"122\" stroke=\"#94A3B8\" stroke-width=\"1.5\"/><rect x=\"65\" y=\"42\" width=\"38\" height=\"80\" rx=\"4\" fill=\"#2563EB\"/><text x=\"84\" y=\"36\" text-anchor=\"middle\" font-family=\"Inter,sans-serif\" font-size=\"10\" font-weight=\"700\" fill=\"#1D4ED8\">320</text><text x=\"84\" y=\"137\" text-anchor=\"middle\" font-family=\"Inter,sans-serif\" font-size=\"10\" fill=\"#475569\">Jan</text><rect x=\"130\" y=\"62\" width=\"38\" height=\"60\" rx=\"4\" fill=\"#2563EB\"/><text x=\"149\" y=\"56\" text-anchor=\"middle\" font-family=\"Inter,sans-serif\" font-size=\"10\" font-weight=\"700\" fill=\"#1D4ED8\">240</text><text x=\"149\" y=\"137\" text-anchor=\"middle\" font-family=\"Inter,sans-serif\" font-size=\"10\" fill=\"#475569\">Feb</text><rect x=\"195\" y=\"82\" width=\"38\" height=\"40\" rx=\"4\" fill=\"#10B981\"/><text x=\"214\" y=\"76\" text-anchor=\"middle\" font-family=\"Inter,sans-serif\" font-size=\"10\" font-weight=\"700\" fill=\"#059669\">160</text><text x=\"214\" y=\"137\" text-anchor=\"middle\" font-family=\"Inter,sans-serif\" font-size=\"10\" fill=\"#475569\">Mar</text><rect x=\"260\" y=\"92\" width=\"38\" height=\"30\" rx=\"4\" fill=\"#10B981\"/><text x=\"279\" y=\"86\" text-anchor=\"middle\" font-family=\"Inter,sans-serif\" font-size=\"10\" font-weight=\"700\" fill=\"#059669\">120</text><text x=\"279\" y=\"137\" text-anchor=\"middle\" font-family=\"Inter,sans-serif\" font-size=\"10\" fill=\"#475569\">Apr</text></svg></div>", "emailCard": "<div class=\"font-en max-w-lg mx-auto bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs sm:text-sm text-slate-700 space-y-1.5\"><p class=\"font-bold text-slate-900 border-b border-slate-200 pb-1\">Subject: Hybrid Work Policy Update</p><p>Following our six-month trial, employees are expected in the office on Tuesdays and Wednesdays for workshops, and may work remotely on other days.</p></div>", "articleCard": "<div class=\"font-en max-w-lg mx-auto bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs sm:text-sm text-slate-700\"><p class=\"font-bold text-slate-900 mb-1\">Urban Green Spaces &amp; Focus</p><p>Longitudinal studies indicate that brief exposure to urban parks mitigates cognitive fatigue more effectively than indoor breaks—even without physical exercise, suggesting visual complexity and natural light play a decisive role.</p></div>"};
+    const QUESTION_BANK = [{"id": "A1-01", "level": "A1", "tier": 0, "skill": "Listening", "type": "listen-pick-image", "instructionAr": "استمع إلى الجملة ثم اختر الصورة الصحيحة:", "audioText": "I carry my yellow backpack to school.", "prompt": "Listen and choose the matching picture:", "items": [{"label": "Apple", "pic": "apple"}, {"label": "Backpack", "pic": "backpack"}, {"label": "Bicycle", "pic": "bicycle"}, {"label": "Umbrella", "pic": "umbrella"}], "correct": 1}, {"id": "A1-02", "level": "A1", "tier": 0, "skill": "Vocabulary", "type": "multi-select-images", "instructionAr": "اختر كل الصور الصحيحة (يمكنك اختيار أكثر من صورة):", "prompt": "Which items do you usually put inside a school bag?", "items": [{"label": "Book", "pic": "book"}, {"label": "Train", "pic": "train"}, {"label": "Pencil", "pic": "pencil"}, {"label": "Burger", "pic": "burger"}], "correctIndices": [0, 2]}, {"id": "A1-03", "level": "A1", "tier": 0, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Arrange the words to make a sentence:", "words": ["is", "My", "a", "sister", "teacher."], "correctSentence": "My sister is a teacher."}, {"id": "A1-04", "level": "A1", "tier": 0, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Every morning, I ______ a glass of orange juice.", "options": ["drinks", "drink", "drinking", "drank"], "correct": 1}, {"id": "A1-05", "level": "A1", "tier": 0, "skill": "Reading", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "When is Sunny Cafe closed?", "options": ["On Mondays", "On Fridays", "On Saturdays", "On Sundays"], "correct": 3, "contextKey": "cafeMenu"}, {"id": "A1-06", "level": "A1", "tier": 0, "skill": "Vocabulary", "type": "multi-select-images", "instructionAr": "اختر كل الصور الصحيحة (يمكنك اختيار أكثر من صورة):", "prompt": "Which of these are healthy fruits or vegetables?", "items": [{"label": "Apple", "pic": "apple"}, {"label": "Carrot", "pic": "carrot"}, {"label": "Camera", "pic": "camera"}, {"label": "Banana", "pic": "banana"}], "correctIndices": [0, 1, 3]}, {"id": "A1-07", "level": "A1", "tier": 0, "skill": "Listening", "type": "listen-pick-image", "instructionAr": "استمع إلى الجملة ثم اختر الصورة الصحيحة:", "audioText": "He rides his blue bicycle in the park.", "prompt": "Listen and choose what he rides:", "items": [{"label": "Bus", "pic": "bus"}, {"label": "Train", "pic": "train"}, {"label": "Bicycle", "pic": "bicycle"}, {"label": "Plane", "pic": "plane"}], "correct": 2}, {"id": "A1-08", "level": "A1", "tier": 0, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Build a simple greeting question:", "words": ["are", "How", "today?", "you"], "correctSentence": "How are you today?"}, {"id": "A1-09", "level": "A1", "tier": 0, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "They ______ from Egypt.", "options": ["is", "am", "are", "be"], "correct": 2}, {"id": "A1-10", "level": "A1", "tier": 0, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "Excuse me, the bus stop is next to the bank.", "prompt": "Where is the bus stop?", "options": ["Inside the school", "Next to the bank", "Behind the park", "In front of the cafe"], "correct": 1}, {"id": "A1-11", "level": "A1", "tier": 0, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "What color is the sun in the sky?", "options": ["Blue", "Yellow", "Purple", "Black"], "correct": 1}, {"id": "A1-12", "level": "A1", "tier": 0, "skill": "Vocabulary", "type": "multi-select-images", "instructionAr": "اختر كل الصور الصحيحة (يمكنك اختيار أكثر من صورة):", "prompt": "Which items can you wear?", "items": [{"label": "Shirt", "pic": "shirt"}, {"label": "Coffee", "pic": "coffee"}, {"label": "Sunglasses", "pic": "sunglasses"}, {"label": "Book", "pic": "book"}], "correctIndices": [0, 2]}, {"id": "A1-13", "level": "A1", "tier": 0, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Order the words correctly:", "words": ["likes", "Ali", "football.", "playing"], "correctSentence": "Ali likes playing football."}, {"id": "A1-14", "level": "A1", "tier": 0, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "She ______ two brothers and one sister.", "options": ["have", "has", "having", "is"], "correct": 1}, {"id": "A1-15", "level": "A1", "tier": 0, "skill": "Reading", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "How much is a Cheese Sandwich at Sunny Cafe?", "options": ["$2.50", "$3.00", "$4.50", "$5.00"], "correct": 2, "contextKey": "cafeMenu"}, {"id": "A1-16", "level": "A1", "tier": 0, "skill": "Listening", "type": "listen-pick-image", "instructionAr": "استمع إلى الجملة ثم اختر الصورة الصحيحة:", "audioText": "Please open your book to page ten.", "prompt": "Listen and choose the object:", "items": [{"label": "Pencil", "pic": "pencil"}, {"label": "Book", "pic": "book"}, {"label": "Key", "pic": "key"}, {"label": "Clock", "pic": "clock"}], "correct": 1}, {"id": "A1-17", "level": "A1", "tier": 0, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "We sleep at ______.", "options": ["morning", "afternoon", "night", "lunch"], "correct": 2}, {"id": "A1-18", "level": "A1", "tier": 0, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Build a negative sentence:", "words": ["do", "I", "not", "coffee.", "like"], "correctSentence": "I do not like coffee."}, {"id": "A1-19", "level": "A1", "tier": 0, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Look at ______ birds in the tree!", "options": ["this", "that", "those", "it"], "correct": 2}, {"id": "A1-20", "level": "A1", "tier": 0, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "My favorite day of the week is Friday because I play with my friends.", "prompt": "Why does the speaker like Friday?", "options": ["School is open", "Plays with friends", "Goes to the doctor", "Studies math"], "correct": 1}, {"id": "A1-21", "level": "A1", "tier": 0, "skill": "Vocabulary", "type": "multi-select-images", "instructionAr": "اختر كل الصور الصحيحة (يمكنك اختيار أكثر من صورة):", "prompt": "Which of these are used for travel or transport?", "items": [{"label": "Bus", "pic": "bus"}, {"label": "Apple", "pic": "apple"}, {"label": "Plane", "pic": "plane"}, {"label": "Train", "pic": "train"}], "correctIndices": [0, 2, 3]}, {"id": "A1-22", "level": "A1", "tier": 0, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "There ______ three apples on the table.", "options": ["is", "are", "am", "was"], "correct": 1}, {"id": "A1-23", "level": "A1", "tier": 0, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Arrange the words:", "words": ["name?", "is", "What", "your"], "correctSentence": "What is your name?"}, {"id": "A1-24", "level": "A1", "tier": 0, "skill": "Listening", "type": "listen-pick-image", "instructionAr": "استمع إلى الجملة ثم اختر الصورة الصحيحة:", "audioText": "Don't forget your keys on the table.", "prompt": "Listen and pick the item:", "items": [{"label": "Key", "pic": "key"}, {"label": "Camera", "pic": "camera"}, {"label": "Shirt", "pic": "shirt"}, {"label": "Banana", "pic": "banana"}], "correct": 0}, {"id": "A1-25", "level": "A1", "tier": 0, "skill": "Reading", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "How many books can a student borrow at City Library?", "options": ["2 books", "3 books", "4 books", "6 books"], "correct": 2, "contextKey": "libraryCard"}, {"id": "A1-26", "level": "A1", "tier": 0, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "I use a ______ to write in my notebook.", "options": ["spoon", "pencil", "shoe", "plate"], "correct": 1}, {"id": "A1-27", "level": "A1", "tier": 0, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "______ you speak English?", "options": ["Do", "Does", "Is", "Are"], "correct": 0}, {"id": "A1-28", "level": "A1", "tier": 0, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Put the words in order:", "words": ["go", "We", "to", "school", "early."], "correctSentence": "We go to school early."}, {"id": "A1-29", "level": "A1", "tier": 0, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "Today is sunny and warm. Let's go to the beach.", "prompt": "What is the weather like today?", "options": ["Rainy", "Snowy", "Sunny and warm", "Windy"], "correct": 2}, {"id": "A1-30", "level": "A1", "tier": 0, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "The opposite of 'big' is ______.", "options": ["tall", "small", "fast", "new"], "correct": 1}, {"id": "A2-01", "level": "A2", "tier": 1, "skill": "Listening", "type": "listen-pick-image", "instructionAr": "استمع إلى الجملة ثم اختر الصورة الصحيحة:", "audioText": "We usually take the bus, but today we are travelling by train.", "prompt": "How are they travelling today?", "items": [{"label": "Bus", "pic": "bus"}, {"label": "Train", "pic": "train"}, {"label": "Plane", "pic": "plane"}, {"label": "Bicycle", "pic": "bicycle"}], "correct": 1}, {"id": "A2-02", "level": "A2", "tier": 1, "skill": "Vocabulary", "type": "multi-select-images", "instructionAr": "اختر كل الصور الصحيحة (يمكنك اختيار أكثر من صورة):", "prompt": "Which signs tell you that something is NOT allowed?", "items": [{"label": "No Smoking", "pic": "noSmoking"}, {"label": "Free Wi-Fi", "pic": "wifi"}, {"label": "No Parking", "pic": "noParking"}, {"label": "Exit", "pic": "exitSign"}], "correctIndices": [0, 2]}, {"id": "A2-03", "level": "A2", "tier": 1, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Build a sentence in the past simple:", "words": ["museum", "visited", "We", "yesterday.", "the"], "correctSentence": "We visited the museum yesterday."}, {"id": "A2-04", "level": "A2", "tier": 1, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "It is raining heavily, so you ______ take an umbrella.", "options": ["should", "couldn't", "mustn't", "didn't"], "correct": 0}, {"id": "A2-05", "level": "A2", "tier": 1, "skill": "Reading", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Why is the school trip moved to Thursday?", "options": ["The teacher is away.", "The museum is closed for repairs.", "Students forgot notebooks.", "The weather is cold."], "correct": 1, "contextKey": "smsCard"}, {"id": "A2-06", "level": "A2", "tier": 1, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "This suitcase is very ______. Can you help me carry it?", "options": ["heavy", "cheap", "quiet", "hungry"], "correct": 0}, {"id": "A2-07", "level": "A2", "tier": 1, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "I went to the supermarket to buy some milk and fresh bread.", "prompt": "Why did the speaker go to the supermarket?", "options": ["To buy milk and bread", "To meet a friend", "To work there", "To buy clothes"], "correct": 0}, {"id": "A2-08", "level": "A2", "tier": 1, "skill": "Vocabulary", "type": "multi-select-images", "instructionAr": "اختر كل الصور الصحيحة (يمكنك اختيار أكثر من صورة):", "prompt": "Which items use electricity or a battery?", "items": [{"label": "Laptop", "pic": "laptop"}, {"label": "Apple", "pic": "apple"}, {"label": "Camera", "pic": "camera"}, {"label": "Headphones", "pic": "headphones"}], "correctIndices": [0, 2, 3]}, {"id": "A2-09", "level": "A2", "tier": 1, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Arrange the future plan:", "words": ["going", "are", "travel", "We", "to", "tomorrow."], "correctSentence": "We are going to travel tomorrow."}, {"id": "A2-10", "level": "A2", "tier": 1, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Cairo is ______ than Alexandria in summer.", "options": ["hot", "hotter", "hottest", "more hot"], "correct": 1}, {"id": "A2-11", "level": "A2", "tier": 1, "skill": "Listening", "type": "listen-pick-image", "instructionAr": "استمع إلى الجملة ثم اختر الصورة الصحيحة:", "audioText": "Take an umbrella because it might rain this afternoon.", "prompt": "Listen and pick the item you need:", "items": [{"label": "Sunglasses", "pic": "sunglasses"}, {"label": "Umbrella", "pic": "umbrella"}, {"label": "Camera", "pic": "camera"}, {"label": "Shirt", "pic": "shirt"}], "correct": 1}, {"id": "A2-12", "level": "A2", "tier": 1, "skill": "Reading", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "What should students do with their phones in the library?", "options": ["Turn them off completely", "Keep them on silent", "Leave them at home", "Use them for calls"], "correct": 1, "contextKey": "libraryCard"}, {"id": "A2-13", "level": "A2", "tier": 1, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "While I ______ dinner, my friend called me.", "options": ["cook", "was cooking", "cooked", "am cooking"], "correct": 1}, {"id": "A2-14", "level": "A2", "tier": 1, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Build a polite question:", "words": ["help", "Could", "me,", "you", "please?"], "correctSentence": "Could you help me, please?"}, {"id": "A2-15", "level": "A2", "tier": 1, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "A person who flies an airplane is a ______.", "options": ["chef", "pilot", "dentist", "baker"], "correct": 1}, {"id": "A2-16", "level": "A2", "tier": 1, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "Turn left at the traffic light, then walk straight for two minutes.", "prompt": "What should you do at the traffic light?", "options": ["Turn right", "Turn left", "Stop", "Go back"], "correct": 1}, {"id": "A2-17", "level": "A2", "tier": 1, "skill": "Vocabulary", "type": "multi-select-images", "instructionAr": "اختر كل الصور الصحيحة (يمكنك اختيار أكثر من صورة):", "prompt": "Which items would you pack for a sunny beach holiday?", "items": [{"label": "Sunglasses", "pic": "sunglasses"}, {"label": "Camera", "pic": "camera"}, {"label": "Laptop", "pic": "laptop"}, {"label": "Banana", "pic": "banana"}], "correctIndices": [0, 1]}, {"id": "A2-18", "level": "A2", "tier": 1, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "How ______ sugar do you want in your tea?", "options": ["many", "much", "few", "a lot"], "correct": 1}, {"id": "A2-19", "level": "A2", "tier": 1, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Order the words:", "words": ["never", "late", "is", "Omar", "for", "class."], "correctSentence": "Omar is never late for class."}, {"id": "A2-20", "level": "A2", "tier": 1, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "I need to ______ a hotel room before our trip.", "options": ["book", "cook", "read", "wash"], "correct": 0}, {"id": "A2-21", "level": "A2", "tier": 1, "skill": "Listening", "type": "listen-pick-image", "instructionAr": "استمع إلى الجملة ثم اختر الصورة الصحيحة:", "audioText": "I always drink a warm cup of coffee while reading the news.", "prompt": "Listen and pick the drink:", "items": [{"label": "Coffee", "pic": "coffee"}, {"label": "Apple", "pic": "apple"}, {"label": "Burger", "pic": "burger"}, {"label": "Carrot", "pic": "carrot"}], "correct": 0}, {"id": "A2-22", "level": "A2", "tier": 1, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "She didn't ______ to the party last night.", "options": ["went", "goes", "go", "going"], "correct": 2}, {"id": "A2-23", "level": "A2", "tier": 1, "skill": "Reading", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "What must Sara's classmate bring on Thursday?", "options": ["A camera", "A notebook", "Lunch", "A ticket"], "correct": 1, "contextKey": "smsCard"}, {"id": "A2-24", "level": "A2", "tier": 1, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Arrange the comparison:", "words": ["faster", "A", "than", "is", "train", "a", "bus."], "correctSentence": "A train is faster than a bus."}, {"id": "A2-25", "level": "A2", "tier": 1, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "The movie starts at seven thirty, so let's meet at seven.", "prompt": "When should they meet?", "options": ["At 7:30", "At 7:00", "At 8:00", "At 6:30"], "correct": 1}, {"id": "A2-26", "level": "A2", "tier": 1, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "If you have a toothache, you should visit a ______.", "options": ["mechanic", "dentist", "journalist", "painter"], "correct": 1}, {"id": "A2-27", "level": "A2", "tier": 1, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "My birthday is ______ October 14th.", "options": ["in", "at", "on", "by"], "correct": 2}, {"id": "A2-28", "level": "A2", "tier": 1, "skill": "Vocabulary", "type": "multi-select-images", "instructionAr": "اختر كل الصور الصحيحة (يمكنك اختيار أكثر من صورة):", "prompt": "Which of these are food items?", "items": [{"label": "Burger", "pic": "burger"}, {"label": "Carrot", "pic": "carrot"}, {"label": "Key", "pic": "key"}, {"label": "Apple", "pic": "apple"}], "correctIndices": [0, 1, 3]}, {"id": "A2-29", "level": "A2", "tier": 1, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Have you ______ been to London?", "options": ["ever", "never", "yet", "since"], "correct": 0}, {"id": "A2-30", "level": "A2", "tier": 1, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Build the sentence:", "words": ["bought", "She", "new", "a", "laptop."], "correctSentence": "She bought a new laptop."}, {"id": "B1-01", "level": "B1", "tier": 2, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "From January to April, electricity usage ______ steadily.", "options": ["increased", "doubled", "decreased", "remained unchanged"], "correct": 2, "contextKey": "chartCard"}, {"id": "B1-02", "level": "B1", "tier": 2, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Build a Second Conditional sentence:", "words": ["would", "time,", "had", "I", "If", "bake.", "I"], "correctSentence": "If I had time, I would bake."}, {"id": "B1-03", "level": "B1", "tier": 2, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Nadia has lived in Alexandria ______ she was ten years old.", "options": ["for", "during", "since", "until"], "correct": 2}, {"id": "B1-04", "level": "B1", "tier": 2, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "Although the hotel was far from the city center, the staff were friendly and the breakfast was fantastic.", "prompt": "What does the speaker say about the hotel?", "options": ["Noisy and overpriced", "Close to the center", "Far out, yet service and food were great", "No breakfast served"], "correct": 2}, {"id": "B1-05", "level": "B1", "tier": 2, "skill": "Listening", "type": "listen-pick-image", "instructionAr": "استمع إلى الجملة ثم اختر الصورة الصحيحة:", "audioText": "Before heading to the sunny beach, remember to pack protection for your eyes.", "prompt": "Which item does the speaker remind you to pack?", "items": [{"label": "Umbrella", "pic": "umbrella"}, {"label": "Sunglasses", "pic": "sunglasses"}, {"label": "Camera", "pic": "camera"}, {"label": "Book", "pic": "book"}], "correct": 1}, {"id": "B1-06", "level": "B1", "tier": 2, "skill": "Reading", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Where can evening swimmers go next Monday?", "options": ["The main pool after 9 PM", "The Oak Street branch for free", "A private club", "Nowhere, all branches are closed"], "correct": 1, "contextKey": "gymNotice"}, {"id": "B1-07", "level": "B1", "tier": 2, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Due to heavy fog, the match was ______ until next Friday.", "options": ["put off", "looked after", "turned on", "given up"], "correct": 0}, {"id": "B1-08", "level": "B1", "tier": 2, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Arrange the passive sentence:", "words": ["built", "bridge", "The", "in", "was", "2020."], "correctSentence": "The bridge was built in 2020."}, {"id": "B1-09", "level": "B1", "tier": 2, "skill": "Vocabulary", "type": "multi-select-images", "instructionAr": "اختر كل الصور الصحيحة (يمكنك اختيار أكثر من صورة):", "prompt": "Which items are helpful for an online remote worker?", "items": [{"label": "Laptop", "pic": "laptop"}, {"label": "Free Wi-Fi", "pic": "wifi"}, {"label": "Headphones", "pic": "headphones"}, {"label": "No Parking", "pic": "noParking"}], "correctIndices": [0, 1, 2]}, {"id": "B1-10", "level": "B1", "tier": 2, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "I'm looking forward to ______ you next week.", "options": ["see", "seeing", "saw", "seen"], "correct": 1}, {"id": "B1-11", "level": "B1", "tier": 2, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "I used to play video games every evening, but now I prefer reading novels.", "prompt": "What has changed in the speaker's habit?", "options": ["Plays more games now", "Now prefers reading novels", "Reads while gaming", "Never played games"], "correct": 1}, {"id": "B1-12", "level": "B1", "tier": 2, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "She felt very ______ before her first job interview.", "options": ["nervous", "delicious", "crowded", "broken"], "correct": 0}, {"id": "B1-13", "level": "B1", "tier": 2, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Order the relative clause:", "words": ["who", "The", "won", "girl", "is", "happy."], "correctSentence": "The girl who won is happy."}, {"id": "B1-14", "level": "B1", "tier": 2, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "You don't ______ to bring your own food; lunch is provided.", "options": ["must", "should", "have", "can"], "correct": 2}, {"id": "B1-15", "level": "B1", "tier": 2, "skill": "Reading", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Why is the community pool closing early next Monday?", "options": ["A swimming competition", "Routine cleaning", "Staff holiday", "Bad weather"], "correct": 1, "contextKey": "gymNotice"}, {"id": "B1-16", "level": "B1", "tier": 2, "skill": "Listening", "type": "listen-pick-image", "instructionAr": "استمع إلى الجملة ثم اختر الصورة الصحيحة:", "audioText": "To study geography and learn about different countries, look at a model of the Earth.", "prompt": "Pick the item described:", "items": [{"label": "Globe", "pic": "globe"}, {"label": "Clock", "pic": "clock"}, {"label": "Key", "pic": "key"}, {"label": "Shirt", "pic": "shirt"}], "correct": 0}, {"id": "B1-17", "level": "B1", "tier": 2, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Could you ______ the volume? The music is too loud.", "options": ["turn down", "turn up", "put on", "take off"], "correct": 0}, {"id": "B1-18", "level": "B1", "tier": 2, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "He asked me where ______ from.", "options": ["was I", "I was", "am I", "I am"], "correct": 1}, {"id": "B1-19", "level": "B1", "tier": 2, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Build a sentence with 'already':", "words": ["finished", "already", "have", "I", "my", "homework."], "correctSentence": "I have already finished my homework."}, {"id": "B1-20", "level": "B1", "tier": 2, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "Even though we missed the early train, we still arrived at the conference on time.", "prompt": "Did they arrive late to the conference?", "options": ["Yes, very late", "No, they arrived on time", "They cancelled the trip", "The conference was moved"], "correct": 1}, {"id": "B1-21", "level": "B1", "tier": 2, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Recycling plastic helps ______ the environment.", "options": ["pollute", "protect", "destroy", "ignore"], "correct": 1}, {"id": "B1-22", "level": "B1", "tier": 2, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "This is the restaurant ______ we had dinner last month.", "options": ["which", "who", "where", "when"], "correct": 2}, {"id": "B1-23", "level": "B1", "tier": 2, "skill": "Vocabulary", "type": "multi-select-images", "instructionAr": "اختر كل الصور الصحيحة (يمكنك اختيار أكثر من صورة):", "prompt": "Which symbols give helpful public information (not a ban)?", "items": [{"label": "Free Wi-Fi", "pic": "wifi"}, {"label": "Exit", "pic": "exitSign"}, {"label": "No Smoking", "pic": "noSmoking"}, {"label": "No Parking", "pic": "noParking"}], "correctIndices": [0, 1]}, {"id": "B1-24", "level": "B1", "tier": 2, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Arrange the words:", "words": ["neither", "tea", "nor", "drinks", "She", "coffee."], "correctSentence": "She drinks neither tea nor coffee."}, {"id": "B1-25", "level": "B1", "tier": 2, "skill": "Reading", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "In which month was electricity usage the lowest?", "options": ["January", "February", "March", "April"], "correct": 3, "contextKey": "chartCard"}, {"id": "B1-26", "level": "B1", "tier": 2, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "By the time we got to the cinema, the film ______.", "options": ["started", "had started", "has started", "starts"], "correct": 1}, {"id": "B1-27", "level": "B1", "tier": 2, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "Make sure to back up your files before updating your computer.", "prompt": "What is the speaker advising?", "options": ["Buy a new computer", "Save a copy of your files", "Delete old folders", "Skip the update"], "correct": 1}, {"id": "B1-28", "level": "B1", "tier": 2, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "The instructions were so ______ that nobody understood what to do.", "options": ["confusing", "clear", "helpful", "brief"], "correct": 0}, {"id": "B1-29", "level": "B1", "tier": 2, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Build the sentence:", "words": ["been", "It", "raining", "has", "all", "day."], "correctSentence": "It has been raining all day."}, {"id": "B1-30", "level": "B1", "tier": 2, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "I'd rather ______ at home tonight than go out.", "options": ["stay", "to stay", "staying", "stayed"], "correct": 0}, {"id": "B2-01", "level": "B2", "tier": 3, "skill": "Reading", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Under the new policy, what is mandatory for employees?", "options": ["Office 5 days a week", "Office on Tuesdays and Wednesdays", "Remote work all week", "No workshops"], "correct": 1, "contextKey": "emailCard"}, {"id": "B2-02", "level": "B2", "tier": 3, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Express past regret:", "words": ["wish", "I", "had", "studied", "I", "harder."], "correctSentence": "I wish I had studied harder."}, {"id": "B2-03", "level": "B2", "tier": 3, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "The new metro line ______ by the end of next year.", "options": ["will have been completed", "is completing", "has completed", "would complete"], "correct": 0}, {"id": "B2-04", "level": "B2", "tier": 3, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "While the software update fixed several security flaws, it unexpectedly slowed down older devices.", "prompt": "How does the speaker view the update?", "options": ["Complete success", "Good for security, problematic for older devices", "Unnecessary", "Total failure"], "correct": 1}, {"id": "B2-05", "level": "B2", "tier": 3, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Her presentation was remarkably ______; she explained a complex topic in five minutes.", "options": ["concise", "ambiguous", "reluctant", "fragile"], "correct": 0}, {"id": "B2-06", "level": "B2", "tier": 3, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Delivery vehicles are ______ from entering the pedestrian zone after 9 AM.", "options": ["encouraged", "prohibited", "subsidized", "prioritized"], "correct": 1}, {"id": "B2-07", "level": "B2", "tier": 3, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Build a Third Conditional sentence:", "words": ["had", "we", "known,", "would", "have", "If", "helped.", "we"], "correctSentence": "If we had known, we would have helped."}, {"id": "B2-08", "level": "B2", "tier": 3, "skill": "Listening", "type": "listen-pick-image", "instructionAr": "استمع إلى الجملة ثم اختر الصورة الصحيحة:", "audioText": "To isolate yourself from background noise during a flight, noise-cancelling audio gear is essential.", "prompt": "Pick the recommended item:", "items": [{"label": "Headphones", "pic": "headphones"}, {"label": "Camera", "pic": "camera"}, {"label": "Sunglasses", "pic": "sunglasses"}, {"label": "Umbrella", "pic": "umbrella"}], "correct": 0}, {"id": "B2-09", "level": "B2", "tier": 3, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Despite ______ exhausted, she stayed up to finish the report.", "options": ["be", "being", "she was", "to be"], "correct": 1}, {"id": "B2-10", "level": "B2", "tier": 3, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "Had we booked the tickets earlier, we wouldn't have had to pay double the price.", "prompt": "What happened because they booked late?", "options": ["They missed the event", "They paid twice as much", "They got a discount", "The event was cancelled"], "correct": 1}, {"id": "B2-11", "level": "B2", "tier": 3, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "The manager ______ the meeting until the financial data arrived.", "options": ["postponed", "accelerated", "ignored", "predicted"], "correct": 0}, {"id": "B2-12", "level": "B2", "tier": 3, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Arrange the passive reporting clause:", "words": ["is", "It", "believed", "that", "prices", "will", "fall."], "correctSentence": "It is believed that prices will fall."}, {"id": "B2-13", "level": "B2", "tier": 3, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "It's high time we ______ a decision about the budget.", "options": ["make", "made", "will make", "making"], "correct": 1}, {"id": "B2-14", "level": "B2", "tier": 3, "skill": "Reading", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "How long did the company test the hybrid schedule before adopting it?", "options": ["Two weeks", "Three months", "Six months", "One year"], "correct": 2, "contextKey": "emailCard"}, {"id": "B2-15", "level": "B2", "tier": 3, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "His argument was ______; it lacked solid evidence to back it up.", "options": ["flawed", "compelling", "thorough", "accurate"], "correct": 0}, {"id": "B2-16", "level": "B2", "tier": 3, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "I'm not entirely convinced that automation will eliminate more jobs than it creates.", "prompt": "What is the speaker's attitude toward automation?", "options": ["Fully supportive", "Skeptical about net job loss", "Certain it will destroy all jobs", "Indifferent"], "correct": 1}, {"id": "B2-17", "level": "B2", "tier": 3, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Order the participle clause:", "words": ["Having", "finished", "work,", "left", "he", "early."], "correctSentence": "Having finished work, he left early."}, {"id": "B2-18", "level": "B2", "tier": 3, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "She can't ______ the email yet; she hasn't been online all morning.", "options": ["have read", "read", "be reading", "to read"], "correct": 0}, {"id": "B2-19", "level": "B2", "tier": 3, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "The new policy aims to ______ collaboration between departments.", "options": ["foster", "hinder", "abolish", "restrict"], "correct": 0}, {"id": "B2-20", "level": "B2", "tier": 3, "skill": "Vocabulary", "type": "multi-select-images", "instructionAr": "اختر كل الصور الصحيحة (يمكنك اختيار أكثر من صورة):", "prompt": "Which items represent modern digital connectivity or media?", "items": [{"label": "Free Wi-Fi", "pic": "wifi"}, {"label": "Laptop", "pic": "laptop"}, {"label": "Camera", "pic": "camera"}, {"label": "Key", "pic": "key"}], "correctIndices": [0, 1, 2]}, {"id": "B2-21", "level": "B2", "tier": 3, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Scarcely had he arrived ______ the phone rang.", "options": ["than", "when", "then", "while"], "correct": 1}, {"id": "B2-22", "level": "B2", "tier": 3, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "Rather than cutting staff, the firm opted to reduce non-essential travel expenses.", "prompt": "How did the firm save money?", "options": ["By firing employees", "By cutting travel expenses", "By closing offices", "By lowering salaries"], "correct": 1}, {"id": "B2-23", "level": "B2", "tier": 3, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Build the cleft sentence:", "words": ["was", "who", "It", "solved", "Nour", "the", "issue."], "correctSentence": "It was Nour who solved the issue."}, {"id": "B2-24", "level": "B2", "tier": 3, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "The witness gave a ______ account of what happened.", "options": ["vivid", "vague", "reluctant", "hostile"], "correct": 0}, {"id": "B2-25", "level": "B2", "tier": 3, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "I'd prefer you ______ anyone about this until Friday.", "options": ["don't tell", "didn't tell", "not telling", "not tell"], "correct": 1}, {"id": "B2-26", "level": "B2", "tier": 3, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "The company's rapid growth is ______ to its innovative marketing.", "options": ["attributed", "opposed", "restricted", "indifferent"], "correct": 0}, {"id": "B2-27", "level": "B2", "tier": 3, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "Although the prototype looked promising, scaling it for mass production proved costly.", "prompt": "What was the main challenge with the prototype?", "options": ["Poor design", "High cost of mass production", "Lack of interest", "Slow speed"], "correct": 1}, {"id": "B2-28", "level": "B2", "tier": 3, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Arrange the words:", "words": ["sooner", "No", "had", "left", "I", "than", "it", "rained."], "correctSentence": "No sooner had I left than it rained."}, {"id": "B2-29", "level": "B2", "tier": 3, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Whatever ______ happens, we will support the team.", "options": ["may", "else", "that", "which"], "correct": 1}, {"id": "B2-30", "level": "B2", "tier": 3, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "She remained ______ even under intense pressure.", "options": ["composed", "frantic", "impulsive", "negligent"], "correct": 0}, {"id": "C1-01", "level": "C1", "tier": 4, "skill": "Reading", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "What can be inferred about the restorative effect of urban parks?", "options": ["Requires intense exercise", "Driven by sensory engagement with nature", "Indoor breaks are equal", "Only residents benefit"], "correct": 1, "contextKey": "articleCard"}, {"id": "C1-02", "level": "C1", "tier": 4, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Build an inverted sentence:", "words": ["she", "Not", "did", "the", "only", "meet", "deadline."], "correctSentence": "Not only did she meet the deadline."}, {"id": "C1-03", "level": "C1", "tier": 4, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Had they invested earlier, their operational costs ______ lower today.", "options": ["would be", "will be", "would have been", "are"], "correct": 0}, {"id": "C1-04", "level": "C1", "tier": 4, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "Critics argue that the proposed regulation, though well-intentioned, could inadvertently stifle innovation among smaller startups.", "prompt": "What concern do critics raise?", "options": ["Designed to harm startups", "May unintentionally hinder emerging companies", "Favors startups", "Lacks positive intent"], "correct": 1}, {"id": "C1-05", "level": "C1", "tier": 4, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "The committee's findings were ______ by a lack of reliable data.", "options": ["undermined", "facilitated", "bolstered", "amplified"], "correct": 0}, {"id": "C1-06", "level": "C1", "tier": 4, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "After hours of fruitless debate, she decided to ______ and call a vote.", "options": ["cut to the chase", "beat around the bush", "miss the boat", "sit on the fence"], "correct": 0}, {"id": "C1-07", "level": "C1", "tier": 4, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Order the formal inversion:", "words": ["circumstances", "Under", "should", "no", "you", "sign", "this."], "correctSentence": "Under no circumstances should you sign this."}, {"id": "C1-08", "level": "C1", "tier": 4, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Were the government ______ taxes, consumer spending would likely rebound.", "options": ["to cut", "cut", "cutting", "cuts"], "correct": 0}, {"id": "C1-09", "level": "C1", "tier": 4, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "Far from resolving the dispute, the mediator's remarks only exacerbated tensions between the two factions.", "prompt": "What effect did the mediator's remarks have?", "options": ["Resolved the dispute", "Made tensions worse", "Had no impact", "Ended negotiations peacefully"], "correct": 1}, {"id": "C1-10", "level": "C1", "tier": 4, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "His ______ attention to detail made him an ideal editor.", "options": ["meticulous", "cursory", "haphazard", "perfunctory"], "correct": 0}, {"id": "C1-11", "level": "C1", "tier": 4, "skill": "Reading", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "According to the passage, why is physical exertion not essential for park restoration?", "options": ["Parks are too small", "Visual complexity and natural light suffice", "Exercise causes fatigue", "Indoor gyms are better"], "correct": 1, "contextKey": "articleCard"}, {"id": "C1-12", "level": "C1", "tier": 4, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Build a sentence with 'Little':", "words": ["know", "Little", "did", "they", "what", "awaited", "them."], "correctSentence": "Little did they know what awaited them."}, {"id": "C1-13", "level": "C1", "tier": 4, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "The proposal, ______ merits are undeniable, still faces political opposition.", "options": ["whose", "which", "whom", "that"], "correct": 0}, {"id": "C1-14", "level": "C1", "tier": 4, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "The CEO's apology seemed ______; critics doubted her sincerity.", "options": ["disingenuous", "candid", "forthright", "earnest"], "correct": 0}, {"id": "C1-15", "level": "C1", "tier": 4, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "While anecdotal evidence abounds, empirical proof linking the two phenomena remains elusive.", "prompt": "What does the speaker conclude?", "options": ["Empirical proof is abundant", "Hard scientific proof is still lacking", "Anecdotes are enough", "The phenomena are identical"], "correct": 1}, {"id": "C1-16", "level": "C1", "tier": 4, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "So ______ was the applause that the speaker could barely continue.", "options": ["thunderous", "thunder", "thunderously", "thundering"], "correct": 0}, {"id": "C1-17", "level": "C1", "tier": 4, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Arrange the subjunctive clause:", "words": ["essential", "is", "It", "that", "he", "be", "present."], "correctSentence": "It is essential that he be present."}, {"id": "C1-18", "level": "C1", "tier": 4, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "The treaty was hailed as a ______ moment in diplomatic history.", "options": ["watershed", "mundane", "trivial", "ephemeral"], "correct": 0}, {"id": "C1-19", "level": "C1", "tier": 4, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "______ as he tried, he could not decipher the encrypted message.", "options": ["Much", "Hard", "Though", "Despite"], "correct": 0}, {"id": "C1-20", "level": "C1", "tier": 4, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "The researcher conceded that her initial hypothesis had been overly optimistic.", "prompt": "What did the researcher admit?", "options": ["Her data was stolen", "Her original expectation was too hopeful", "Her critics were wrong", "The study was incomplete"], "correct": 1}, {"id": "C1-21", "level": "C1", "tier": 4, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Technological progress has rendered many legacy systems ______.", "options": ["obsolete", "ubiquitous", "indispensable", "resilient"], "correct": 0}, {"id": "C1-22", "level": "C1", "tier": 4, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Build the inverted conditional:", "words": ["Should", "need", "you", "assistance,", "please", "call."], "correctSentence": "Should you need assistance, please call."}, {"id": "C1-23", "level": "C1", "tier": 4, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Not until the audit was finalized ______ the discrepancy.", "options": ["did they notice", "they noticed", "noticed they", "had they noticed"], "correct": 0}, {"id": "C1-24", "level": "C1", "tier": 4, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "The author's prose is celebrated for its ______ and clarity.", "options": ["lucidity", "obscurity", "redundancy", "verbosity"], "correct": 0}, {"id": "C1-25", "level": "C1", "tier": 4, "skill": "Listening", "type": "listen-comprehension", "instructionAr": "استمع إلى المقطع الصوتي ثم أجب:", "audioText": "In hindsight, the merger proved to be a double-edged sword, boosting revenue while eroding company culture.", "prompt": "How does the speaker describe the merger?", "options": ["Purely harmful", "Mixed results: higher revenue, weaker culture", "A complete triumph", "Irrelevant to revenue"], "correct": 1}, {"id": "C1-26", "level": "C1", "tier": 4, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "She is widely regarded ______ one of the foremost experts in the field.", "options": ["as", "for", "to be", "like"], "correct": 0}, {"id": "C1-27", "level": "C1", "tier": 4, "skill": "Grammar", "type": "sentence-builder", "instructionAr": "اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:", "prompt": "Arrange the formal concession:", "words": ["Be", "that", "as", "it", "may,", "we", "proceed."], "correctSentence": "Be that as it may, we proceed."}, {"id": "C1-28", "level": "C1", "tier": 4, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "The spokesperson tried to ______ the controversy with vague assurances.", "options": ["defuse", "ignite", "amplify", "provoke"], "correct": 0}, {"id": "C1-29", "level": "C1", "tier": 4, "skill": "Grammar", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Scarcely ______ any precedent for such a rapid policy reversal.", "options": ["is there", "there is", "was it", "has it"], "correct": 0}, {"id": "C1-30", "level": "C1", "tier": 4, "skill": "Vocabulary", "type": "mcq", "instructionAr": "اختر الإجابة الصحيحة:", "prompt": "Their findings ______ earlier assumptions about early childhood literacy.", "options": ["corroborate", "fabricate", "disdain", "evade"], "correct": 0}];
 
-    const CONTEXT_CARDS = {
-      cafeMenu: `
-        <div class="font-en max-w-md mx-auto bg-amber-50 border border-amber-200 rounded-2xl p-4">
-          <div class="flex items-center justify-between border-b border-amber-200 pb-2 mb-2">
-            <span class="font-bold text-amber-900 text-sm">SUNNY CAFE</span>
-            <span class="text-xs bg-amber-200 text-amber-900 px-2 py-0.5 rounded font-semibold">8 AM – 6 PM</span>
-          </div>
-          <div class="space-y-1 text-xs sm:text-sm text-slate-700">
-            <div class="flex justify-between"><span>Hot Coffee</span><span class="font-bold">$3.00</span></div>
-            <div class="flex justify-between"><span>Cheese Sandwich</span><span class="font-bold">$4.50</span></div>
-          </div>
-          <p class="mt-2 text-xs font-bold text-amber-800">* Closed on Sundays</p>
-        </div>`,
-      smsCard: `
-        <div class="font-en max-w-md mx-auto bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2">
-          <p class="text-xs font-bold text-slate-500">Message from Sara (10:15 AM)</p>
-          <p class="text-sm text-slate-800 leading-relaxed">"Hi! The science museum is closed for repairs today, so our school trip is moved to <strong>Thursday morning</strong>. Bring your notebook!"</p>
-        </div>`,
-      chartCard: `
-        <div class="flex justify-center">
-          <svg viewBox="0 0 340 150" class="w-full max-w-sm h-auto rounded-2xl bg-slate-50 p-3 border border-slate-200">
-            <text x="170" y="18" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#1E293B">Monthly Electricity Usage (kWh)</text>
-            <line x1="40" y1="122" x2="310" y2="122" stroke="#94A3B8" stroke-width="1.5"/>
-            <rect x="65" y="42" width="38" height="80" rx="4" fill="#2563EB"/><text x="84" y="36" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#1D4ED8">320</text><text x="84" y="137" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#475569">Jan</text>
-            <rect x="130" y="62" width="38" height="60" rx="4" fill="#2563EB"/><text x="149" y="56" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#1D4ED8">240</text><text x="149" y="137" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#475569">Feb</text>
-            <rect x="195" y="82" width="38" height="40" rx="4" fill="#10B981"/><text x="214" y="76" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#059669">160</text><text x="214" y="137" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#475569">Mar</text>
-            <rect x="260" y="92" width="38" height="30" rx="4" fill="#10B981"/><text x="279" y="86" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#059669">120</text><text x="279" y="137" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#475569">Apr</text>
-          </svg>
-        </div>`,
-      emailCard: `
-        <div class="font-en max-w-lg mx-auto bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs sm:text-sm text-slate-700 space-y-2">
-          <p class="font-bold text-slate-900 border-b border-slate-200 pb-1.5">Subject: Hybrid Work Policy Update</p>
-          <p class="leading-relaxed">Following our six-month trial, the team will adopt a hybrid schedule. Employees are expected in the office on Tuesdays and Wednesdays for workshops, and may work remotely on other days.</p>
-        </div>`,
-      articleCard: `
-        <div class="font-en max-w-lg mx-auto bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
-          <p class="font-bold text-slate-900 mb-1">Urban Green Spaces &amp; Focus</p>
-          <p>Longitudinal studies indicate that brief exposure to urban parks mitigates cognitive fatigue more effectively than indoor breaks—even without physical exercise, suggesting visual complexity and natural light play a decisive role.</p>
-        </div>`
-    };
-
-    // =========================================================================
-    // 3. SMART QUESTION BANK (30 Questions: 6 per level A1..C1, 5 interactive types)
-    // =========================================================================
-    const QUESTION_BANK = [
-      // ---------------- A1 (Tier 0) ----------------
-      {
-        id: 'A1-LP1', level: 'A1', tier: 0, skill: 'Listening', type: 'listen-pick-image',
-        instructionAr: 'استمع إلى الجملة ثم اختر الصورة التي سمعتها:',
-        audioText: 'I always carry my yellow backpack to school.',
-        prompt: 'Listen and choose the matching picture:',
-        items: [
-          { label: 'Apple', svg: PICS.apple },
-          { label: 'Backpack', svg: PICS.backpack },
-          { label: 'Bicycle', svg: PICS.bicycle },
-          { label: 'Umbrella', svg: PICS.umbrella }
-        ],
-        correct: 1
-      },
-      {
-        id: 'A1-MS1', level: 'A1', tier: 0, skill: 'Vocabulary', type: 'multi-select-images',
-        instructionAr: 'اختر كل الصور التي تنطبق عليها الإجابة (يمكنك اختيار أكثر من صورة):',
-        prompt: 'Which items do you usually find inside a school bag?',
-        items: [
-          { label: 'Book', svg: PICS.book },
-          { label: 'Train', svg: PICS.train },
-          { label: 'Pencil', svg: PICS.pencil },
-          { label: 'Burger', svg: PICS.burger }
-        ],
-        correctIndices: [0, 2]
-      },
-      {
-        id: 'A1-SB1', level: 'A1', tier: 0, skill: 'Grammar', type: 'sentence-builder',
-        instructionAr: 'اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة:',
-        prompt: 'Arrange the words to make a correct sentence:',
-        words: ['is', 'My', 'a', 'sister', 'teacher.'],
-        correctSentence: 'My sister is a teacher.'
-      },
-      {
-        id: 'A1-G1', level: 'A1', tier: 0, skill: 'Grammar', type: 'mcq',
-        instructionAr: 'اختر الكلمة الصحيحة لإكمال الجملة:',
-        prompt: 'Every morning, I ______ a glass of orange juice.',
-        options: ['drinks', 'drink', 'drinking', 'drank'],
-        correct: 1
-      },
-      {
-        id: 'A1-R1', level: 'A1', tier: 0, skill: 'Reading', type: 'mcq',
-        instructionAr: 'اقرأ قائمة المقهى ثم أجب:',
-        contextHtml: CONTEXT_CARDS.cafeMenu,
-        prompt: 'When is Sunny Cafe closed?',
-        options: ['On Mondays', 'On Fridays', 'On Saturdays', 'On Sundays'],
-        correct: 3
-      },
-      {
-        id: 'A1-MS2', level: 'A1', tier: 0, skill: 'Vocabulary', type: 'multi-select-images',
-        instructionAr: 'اختر كل الصور الصحيحة:',
-        prompt: 'Which of these are healthy fruits or vegetables?',
-        items: [
-          { label: 'Apple', svg: PICS.apple },
-          { label: 'Carrot', svg: PICS.carrot },
-          { label: 'Camera', svg: PICS.camera },
-          { label: 'Banana', svg: PICS.banana }
-        ],
-        correctIndices: [0, 1, 3]
-      },
-
-      // ---------------- A2 (Tier 1) ----------------
-      {
-        id: 'A2-LP1', level: 'A2', tier: 1, skill: 'Listening', type: 'listen-pick-image',
-        instructionAr: 'استمع للجملة واختر وسيلة المواصلات المذكورة:',
-        audioText: 'We usually go by bus, but today we are travelling by train.',
-        prompt: 'How are they travelling today?',
-        items: [
-          { label: 'Bus', svg: PICS.bus },
-          { label: 'Train', svg: PICS.train },
-          { label: 'Plane', svg: PICS.plane },
-          { label: 'Bicycle', svg: PICS.bicycle }
-        ],
-        correct: 1
-      },
-      {
-        id: 'A2-MS1', level: 'A2', tier: 1, skill: 'Vocabulary', type: 'multi-select-images',
-        instructionAr: 'اختر كل العلامات التي تعني "ممنوع":',
-        prompt: 'Which signs tell you that something is NOT allowed?',
-        items: [
-          { label: 'No Smoking', svg: PICS.noSmoking },
-          { label: 'Free Wi-Fi', svg: PICS.wifi },
-          { label: 'No Parking', svg: PICS.noParking },
-          { label: 'Exit', svg: PICS.exitSign }
-        ],
-        correctIndices: [0, 2]
-      },
-      {
-        id: 'A2-SB1', level: 'A2', tier: 1, skill: 'Grammar', type: 'sentence-builder',
-        instructionAr: 'رتّب الكلمات لتكوين جملة في الماضي البسيط:',
-        prompt: 'Build the sentence in the past simple:',
-        words: ['museum', 'visited', 'We', 'yesterday.', 'the'],
-        correctSentence: 'We visited the museum yesterday.'
-      },
-      {
-        id: 'A2-G1', level: 'A2', tier: 1, skill: 'Grammar', type: 'mcq',
-        instructionAr: 'اختر الكلمة المناسبة:',
-        prompt: 'It is raining heavily outside, so you ______ take an umbrella.',
-        options: ['should', 'couldn\'t', 'mustn\'t', 'didn\'t'],
-        correct: 0
-      },
-      {
-        id: 'A2-R1', level: 'A2', tier: 1, skill: 'Reading', type: 'mcq',
-        instructionAr: 'اقرأ رسالة سارة وأجب:',
-        contextHtml: CONTEXT_CARDS.smsCard,
-        prompt: 'Why is the school trip moved to Thursday?',
-        options: [
-          'The teacher is away today.',
-          'The museum is closed for repairs.',
-          'The students forgot their notebooks.',
-          'The weather is too cold.'
-        ],
-        correct: 1
-      },
-      {
-        id: 'A2-V1', level: 'A2', tier: 1, skill: 'Vocabulary', type: 'mcq',
-        instructionAr: 'اختر الكلمة المناسبة للجملة:',
-        prompt: 'This suitcase is very ______. Can you help me carry it?',
-        options: ['heavy', 'cheap', 'quiet', 'hungry'],
-        correct: 0
-      },
-
-      // ---------------- B1 (Tier 2) ----------------
-      {
-        id: 'B1-V1', level: 'B1', tier: 2, skill: 'Vocabulary', type: 'mcq',
-        instructionAr: 'ادرس الرسم البياني واختر الوصف الأدق:',
-        contextHtml: CONTEXT_CARDS.chartCard,
-        prompt: 'From January to April, electricity usage ______ steadily.',
-        options: ['increased', 'doubled', 'decreased', 'remained unchanged'],
-        correct: 2
-      },
-      {
-        id: 'B1-SB1', level: 'B1', tier: 2, skill: 'Grammar', type: 'sentence-builder',
-        instructionAr: 'رتّب الكلمات لتكوين جملة شرطية صحيحة:',
-        prompt: 'Build a Second Conditional sentence:',
-        words: ['would', 'time,', 'had', 'I', 'If', 'bake.', 'I'],
-        correctSentence: 'If I had time, I would bake.'
-      },
-      {
-        id: 'B1-G1', level: 'B1', tier: 2, skill: 'Grammar', type: 'mcq',
-        instructionAr: 'اختر الأداة الصحيحة للمضارع التام:',
-        prompt: 'Nadia has lived in Alexandria ______ she was ten years old.',
-        options: ['for', 'during', 'since', 'until'],
-        correct: 2
-      },
-      {
-        id: 'B1-L1', level: 'B1', tier: 2, skill: 'Listening', type: 'listen-comprehension',
-        instructionAr: 'استمع إلى المقطع الصوتي ثم أجب:',
-        audioText: 'Although the hotel was far from the city center, the staff were friendly and the breakfast was fantastic.',
-        prompt: 'What does the speaker say about the hotel?',
-        options: [
-          'It was noisy and overpriced.',
-          'It was close to the center.',
-          'It was far out, yet the service and food were great.',
-          'It did not serve breakfast.'
-        ],
-        correct: 2
-      },
-      {
-        id: 'B1-LP1', level: 'B1', tier: 2, skill: 'Listening', type: 'listen-pick-image',
-        instructionAr: 'استمع إلى الوصف واختر الشيء المناسب للرحلة:',
-        audioText: 'Before we head to the sunny beach, remember to pack protection for your eyes.',
-        prompt: 'Which item does the speaker remind you to pack?',
-        items: [
-          { label: 'Umbrella', svg: PICS.umbrella },
-          { label: 'Sunglasses', svg: PICS.sunglasses },
-          { label: 'Camera', svg: PICS.camera },
-          { label: 'Book', svg: PICS.book }
-        ],
-        correct: 1
-      },
-      {
-        id: 'B1-R1', level: 'B1', tier: 2, skill: 'Reading', type: 'mcq',
-        instructionAr: 'اختر الفعل المركب المناسب للسياق:',
-        prompt: 'Due to heavy fog, the match was ______ until next Friday.',
-        options: ['put off', 'looked after', 'turned on', 'given up'],
-        correct: 0
-      },
-
-      // ---------------- B2 (Tier 3) ----------------
-      {
-        id: 'B2-R1', level: 'B2', tier: 3, skill: 'Reading', type: 'mcq',
-        instructionAr: 'اقرأ البريد الإلكتروني التالي وأجب:',
-        contextHtml: CONTEXT_CARDS.emailCard,
-        prompt: 'Under the new policy, what is required of employees?',
-        options: [
-          'Working from the office five days a week.',
-          'Attending the office on Tuesdays and Wednesdays.',
-          'Working remotely all week.',
-          'Cancelling collaborative workshops.'
-        ],
-        correct: 1
-      },
-      {
-        id: 'B2-SB1', level: 'B2', tier: 3, skill: 'Grammar', type: 'sentence-builder',
-        instructionAr: 'رتّب الكلمات لتكوين جملة تعبر عن الندم في الماضي:',
-        prompt: 'Arrange the words to express past regret:',
-        words: ['wish', 'I', 'had', 'studied', 'I', 'harder.'],
-        correctSentence: 'I wish I had studied harder.'
-      },
-      {
-        id: 'B2-G1', level: 'B2', tier: 3, skill: 'Grammar', type: 'mcq',
-        instructionAr: 'اختر صيغة المستقبل التام المبني للمجهول:',
-        prompt: 'The new metro line ______ by the end of next year.',
-        options: ['will have been completed', 'is completing', 'has completed', 'would complete'],
-        correct: 0
-      },
-      {
-        id: 'B2-L1', level: 'B2', tier: 3, skill: 'Listening', type: 'listen-comprehension',
-        instructionAr: 'استمع للتصريح التالي وحدد رأي المتحدث:',
-        audioText: 'While the software update fixed several security flaws, it unexpectedly slowed down older devices.',
-        prompt: 'How does the speaker view the software update?',
-        options: [
-          'As a complete success with no drawbacks.',
-          'As good for security, but problematic for older devices.',
-          'As unnecessary for security.',
-          'As a failure that broke all devices.'
-        ],
-        correct: 1
-      },
-      {
-        id: 'B2-V1', level: 'B2', tier: 3, skill: 'Vocabulary', type: 'mcq',
-        instructionAr: 'اختر الكلمة الأدق لإكمال الجملة:',
-        prompt: 'Her presentation was remarkably ______; she explained a complex topic in five minutes.',
-        options: ['concise', 'ambiguous', 'reluctant', 'fragile'],
-        correct: 0
-      },
-      {
-        id: 'B2-V2', level: 'B2', tier: 3, skill: 'Vocabulary', type: 'mcq',
-        instructionAr: 'اختر الكلمة الصحيحة:',
-        prompt: 'Delivery vehicles are ______ from entering the pedestrian zone after 9 AM.',
-        options: ['encouraged', 'prohibited', 'subsidized', 'prioritized'],
-        correct: 1
-      },
-
-      // ---------------- C1 (Tier 4) ----------------
-      {
-        id: 'C1-R1', level: 'C1', tier: 4, skill: 'Reading', type: 'mcq',
-        instructionAr: 'اقرأ المقتطف البحثي وأجب عن الاستنتاج:',
-        contextHtml: CONTEXT_CARDS.articleCard,
-        prompt: 'What can be inferred about the restorative effect of urban parks?',
-        options: [
-          'It requires intense aerobic exercise.',
-          'It is driven by sensory engagement with nature.',
-          'Indoor breaks are equally effective.',
-          'Only long-term residents benefit.'
-        ],
-        correct: 1
-      },
-      {
-        id: 'C1-SB1', level: 'C1', tier: 4, skill: 'Grammar', type: 'sentence-builder',
-        instructionAr: 'رتّب الكلمات باستخدام أسلوب القلب البلاغي (Inversion):',
-        prompt: 'Build an inverted sentence:',
-        words: ['she', 'Not', 'did', 'the', 'only', 'meet', 'deadline.'],
-        correctSentence: 'Not only did she meet the deadline.'
-      },
-      {
-        id: 'C1-G1', level: 'C1', tier: 4, skill: 'Grammar', type: 'mcq',
-        instructionAr: 'أكمل الجملة الشرطية المختلطة:',
-        prompt: 'Had they invested earlier, their operational costs ______ lower today.',
-        options: ['would be', 'will be', 'would have been', 'are'],
-        correct: 0
-      },
-      {
-        id: 'C1-L1', level: 'C1', tier: 4, skill: 'Listening', type: 'listen-comprehension',
-        instructionAr: 'استمع للتحليل الصوتي ثم أجب:',
-        audioText: 'Critics argue that the proposed regulation, though well-intentioned, could inadvertently stifle innovation among smaller startups.',
-        prompt: 'What concern do critics raise about the regulation?',
-        options: [
-          'It was designed to harm startups intentionally.',
-          'It may unintentionally hinder growth for emerging companies.',
-          'It favors startups over large corporations.',
-          'It lacks any positive intention.'
-        ],
-        correct: 1
-      },
-      {
-        id: 'C1-V1', level: 'C1', tier: 4, skill: 'Vocabulary', type: 'mcq',
-        instructionAr: 'اختر الكلمة الأكاديمية الأنسب:',
-        prompt: 'The committee\'s findings were ______ by a lack of reliable data.',
-        options: ['undermined', 'facilitated', 'bolstered', 'amplified'],
-        correct: 0
-      },
-      {
-        id: 'C1-V2', level: 'C1', tier: 4, skill: 'Vocabulary', type: 'mcq',
-        instructionAr: 'اختر التعبير الاصطلاحي الأنسب:',
-        prompt: 'After hours of fruitless debate, she decided to ______ and call a vote.',
-        options: ['cut to the chase', 'beat around the bush', 'miss the boat', 'sit on the fence'],
-        correct: 0
-      }
-    ];
-
-    // =========================================================================
-    // 4. CEFR METADATA & SUB-LEVEL LOGIC (Level 1 / 2 / 3)
-    // =========================================================================
     const CEFR_INFO = {
       A1: {
         title: 'Beginner',
@@ -733,51 +288,26 @@
       const band = bands.find((b) => ability >= b.min && ability < b.max) || bands[4];
       const ratio = Math.max(0, Math.min(0.999, (ability - band.min) / (band.max - band.min)));
       const subNum = ratio < 0.34 ? 1 : ratio < 0.68 ? 2 : 3;
-      return {
-        cefrLevel: band.code,
-        subLevel: `${band.code} - Level ${subNum}`
-      };
+      return { cefrLevel: band.code, subNum, subLevel: `${band.code} - Level ${subNum}` };
     }
 
     function computeManualSublevel(levelCode, scorePct) {
       const subNum = scorePct < 55 ? 1 : scorePct < 80 ? 2 : 3;
-      return `${levelCode} - Level ${subNum}`;
+      return { subNum, subLevel: `${levelCode} - Level ${subNum}` };
     }
 
-    // =========================================================================
-    // 5. STATE
-    // =========================================================================
     const state = {
-      studentName: '',
-      studentAge: 0,
-      mode: 'auto',
-      manualLevel: 'A1',
-      totalQuestions: AUTO_TOTAL_QUESTIONS,
-      startTime: null,
-      questionIndex: 0,
-      currentTier: 0, // Always starts at A1
-      streakCorrect: 0,
-      abilityIndex: 0.8,
-      usedIds: new Set(),
-      currentQuestion: null,
-      selectedAnswer: null, // number | number[] | string[]
-      answers: [],
-      skillStats: {
-        Vocabulary: { correct: 0, total: 0 },
-        Grammar: { correct: 0, total: 0 },
-        Reading: { correct: 0, total: 0 },
-        Listening: { correct: 0, total: 0 }
-      },
-      chartInstance: null,
-      lastPayload: null
+      studentName: '', studentAge: 0, mode: 'auto', manualLevel: 'A1',
+      startTime: null, questionIndex: 0, currentTier: 0, streakCorrect: 0, abilityIndex: 0.8,
+      usedIds: new Set(), currentQuestion: null, selectedAnswer: null, answers: [],
+      skillStats: { Vocabulary: { correct: 0, total: 0 }, Grammar: { correct: 0, total: 0 }, Reading: { correct: 0, total: 0 }, Listening: { correct: 0, total: 0 } },
+      chartInstance: null
     };
 
     const $ = (id) => document.getElementById(id);
 
     function showScreen(screenId) {
-      ['screen-welcome', 'screen-quiz', 'screen-results'].forEach((id) => {
-        $(id).classList.toggle('hidden', id !== screenId);
-      });
+      ['screen-welcome', 'screen-quiz', 'screen-results'].forEach((id) => $(id).classList.toggle('hidden', id !== screenId));
     }
 
     function speakText(text, rate = 1.0, waveEl = null) {
@@ -797,15 +327,11 @@
       window.speechSynthesis.speak(utter);
     }
 
-    // =========================================================================
-    // 6. MODE SELECTION
-    // =========================================================================
     function setTestMode(mode) {
       state.mode = mode;
       $('mode-auto-btn').classList.toggle('mode-tab-active', mode === 'auto');
       $('mode-manual-btn').classList.toggle('mode-tab-active', mode === 'manual');
       $('manual-level-box').classList.toggle('hidden', mode !== 'manual');
-      state.totalQuestions = mode === 'auto' ? AUTO_TOTAL_QUESTIONS : MANUAL_TOTAL_QUESTIONS;
     }
 
     $('mode-auto-btn').addEventListener('click', () => setTestMode('auto'));
@@ -820,26 +346,19 @@
       });
     });
 
-    // =========================================================================
-    // 7. QUESTION SELECTION & INTERACTIVE RENDERERS
-    // =========================================================================
     function pickNextQuestion() {
       if (state.mode === 'manual') {
         const targetTier = LEVELS.indexOf(state.manualLevel);
         return QUESTION_BANK.find((q) => q.tier === targetTier && !state.usedIds.has(q.id));
       }
-      const skillCounts = Object.entries(state.skillStats)
-        .map(([skill, s]) => ({ skill, total: s.total }))
-        .sort((a, b) => a.total - b.total);
+      const skillCounts = Object.entries(state.skillStats).map(([skill, s]) => ({ skill, total: s.total })).sort((a, b) => a.total - b.total);
       const candidates = QUESTION_BANK.filter((q) => q.tier === state.currentTier && !state.usedIds.has(q.id));
       for (const { skill } of skillCounts) {
         const m = candidates.find((q) => q.skill === skill);
         if (m) return m;
       }
       if (candidates.length > 0) return candidates[0];
-      return QUESTION_BANK
-        .filter((q) => !state.usedIds.has(q.id))
-        .sort((a, b) => Math.abs(a.tier - state.currentTier) - Math.abs(b.tier - state.currentTier))[0];
+      return QUESTION_BANK.filter((q) => !state.usedIds.has(q.id)).sort((a, b) => Math.abs(a.tier - state.currentTier) - Math.abs(b.tier - state.currentTier))[0];
     }
 
     function renderAudioPlayer(audioText) {
@@ -848,26 +367,20 @@
       box.innerHTML = `
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div class="flex items-center gap-2.5">
-            <button id="btn-play-normal" type="button"
-              class="tactile-btn px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 border-b-4 border-blue-800 text-white font-bold text-sm flex items-center gap-2 cursor-pointer">
+            <button id="btn-play-normal" type="button" class="tactile-btn px-4 py-2.5 rounded-xl bg-[#00A0E9] hover:bg-[#0284C7] border-b-4 border-[#0369A1] text-white font-bold text-sm flex items-center gap-2 cursor-pointer">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
               <span>استمع</span>
             </button>
-            <button id="btn-play-slow" type="button"
-              class="tactile-btn px-3 py-2.5 rounded-xl bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold text-xs cursor-pointer">
-              بطيء 0.8x
-            </button>
+            <button id="btn-play-slow" type="button" class="tactile-btn px-3 py-2.5 rounded-xl bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold text-xs cursor-pointer">بطيء 0.8x</button>
           </div>
           <div id="audio-wave" class="wave-paused flex items-end gap-1 h-7 px-2">
-            <span class="wave-bar w-1.5 h-3 bg-blue-500 rounded-full" style="animation-delay:0s"></span>
-            <span class="wave-bar w-1.5 h-6 bg-blue-500 rounded-full" style="animation-delay:0.15s"></span>
-            <span class="wave-bar w-1.5 h-4 bg-blue-500 rounded-full" style="animation-delay:0.3s"></span>
-            <span class="wave-bar w-1.5 h-7 bg-blue-500 rounded-full" style="animation-delay:0.45s"></span>
-            <span class="wave-bar w-1.5 h-5 bg-blue-500 rounded-full" style="animation-delay:0.6s"></span>
+            <span class="wave-bar w-1.5 h-3 bg-[#00A0E9] rounded-full" style="animation-delay:0s"></span>
+            <span class="wave-bar w-1.5 h-6 bg-[#00A0E9] rounded-full" style="animation-delay:0.15s"></span>
+            <span class="wave-bar w-1.5 h-4 bg-[#00A0E9] rounded-full" style="animation-delay:0.3s"></span>
+            <span class="wave-bar w-1.5 h-7 bg-[#00A0E9] rounded-full" style="animation-delay:0.45s"></span>
+            <span class="wave-bar w-1.5 h-5 bg-[#00A0E9] rounded-full" style="animation-delay:0.6s"></span>
           </div>
-          <button id="btn-toggle-transcript" type="button" class="text-xs text-slate-500 underline hover:text-slate-800 cursor-pointer">
-            لم يعمل الصوت؟ اعرض النص
-          </button>
+          <button id="btn-toggle-transcript" type="button" class="text-xs text-slate-500 underline hover:text-slate-800 cursor-pointer">لم يعمل الصوت؟ اعرض النص</button>
         </div>
         <p id="audio-transcript" class="hidden mt-3 pt-3 border-t border-slate-200 font-en text-sm text-slate-600 italic"></p>
       `;
@@ -882,14 +395,13 @@
       const q = pickNextQuestion();
       state.currentQuestion = q;
       state.usedIds.add(q.id);
-      state.selectedAnswer = q.type === 'multi-select-images' || q.type === 'sentence-builder' ? [] : null;
+      state.selectedAnswer = (q.type === 'multi-select-images' || q.type === 'sentence-builder') ? [] : null;
 
       const num = state.questionIndex + 1;
-      const total = state.totalQuestions;
-      const remaining = total - num;
-      const pct = Math.round((num / total) * 100);
+      const remaining = TOTAL_QUESTIONS - num;
+      const pct = Math.round((num / TOTAL_QUESTIONS) * 100);
 
-      $('q-counter').textContent = `السؤال ${num} من ${total}`;
+      $('q-counter').textContent = `السؤال ${num} من ${TOTAL_QUESTIONS}`;
       $('q-skill-badge').textContent = q.skill;
       $('q-remaining').textContent = remaining === 0 ? 'السؤال الأخير' : `متبقي ${remaining} ${remaining === 1 ? 'سؤال' : remaining <= 10 ? 'أسئلة' : 'سؤالاً'}`;
       $('q-progress-pct').textContent = `${pct}%`;
@@ -904,17 +416,12 @@
       $('q-prompt').textContent = q.prompt;
       $('quiz-error').classList.add('hidden');
 
-      // Audio & Context slots
-      if (q.audioText) {
-        renderAudioPlayer(q.audioText);
-      } else {
-        $('q-audio-box').classList.add('hidden');
-        $('q-audio-box').innerHTML = '';
-      }
+      if (q.audioText) renderAudioPlayer(q.audioText);
+      else { $('q-audio-box').classList.add('hidden'); $('q-audio-box').innerHTML = ''; }
 
-      if (q.contextHtml) {
+      if (q.contextKey && CONTEXT_CARDS[q.contextKey]) {
         $('q-context-box').classList.remove('hidden');
-        $('q-context-box').innerHTML = q.contextHtml;
+        $('q-context-box').innerHTML = CONTEXT_CARDS[q.contextKey];
       } else {
         $('q-context-box').classList.add('hidden');
         $('q-context-box').innerHTML = '';
@@ -923,119 +430,74 @@
       const area = $('q-interactive-area');
       area.innerHTML = '';
 
-      // 1) LISTEN-PICK-IMAGE or MULTI-SELECT-IMAGES
       if (q.type === 'listen-pick-image' || q.type === 'multi-select-images') {
         const grid = document.createElement('div');
         grid.className = 'grid grid-cols-2 sm:grid-cols-4 gap-3 font-en';
         q.items.forEach((item, idx) => {
           const btn = document.createElement('button');
           btn.type = 'button';
-          btn.style.animationDelay = `${idx * 50}ms`;
-          btn.className = 'animate-tile choice-card relative p-4 rounded-2xl border-2 border-slate-200 bg-white flex flex-col items-center gap-2.5 cursor-pointer';
+          btn.style.animationDelay = `${idx * 45}ms`;
+          btn.className = 'animate-tile choice-card relative p-4 rounded-2xl border-2 border-slate-200 bg-white flex flex-col items-center gap-2 cursor-pointer';
           btn.innerHTML = `
-            <span class="check-dot hidden absolute top-2.5 right-2.5 w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center">✓</span>
-            ${item.svg}
+            <span class="check-dot hidden absolute top-2.5 right-2.5 w-6 h-6 rounded-full bg-[#FFD100] text-slate-900 text-xs font-bold flex items-center justify-center">✓</span>
+            ${PICS[item.pic] || ''}
             <span class="text-sm font-bold text-slate-800">${item.label}</span>
           `;
           btn.addEventListener('click', () => {
             $('quiz-error').classList.add('hidden');
             if (q.type === 'listen-pick-image') {
               state.selectedAnswer = idx;
-              grid.querySelectorAll('button').forEach((b) => {
-                b.classList.remove('choice-selected');
-                b.querySelector('.check-dot').classList.add('hidden');
-              });
+              grid.querySelectorAll('button').forEach((b) => { b.classList.remove('choice-selected'); b.querySelector('.check-dot').classList.add('hidden'); });
               btn.classList.add('choice-selected');
               btn.querySelector('.check-dot').classList.remove('hidden');
             } else {
               const pos = state.selectedAnswer.indexOf(idx);
-              if (pos === -1) {
-                state.selectedAnswer.push(idx);
-                btn.classList.add('choice-selected');
-                btn.querySelector('.check-dot').classList.remove('hidden');
-              } else {
-                state.selectedAnswer.splice(pos, 1);
-                btn.classList.remove('choice-selected');
-                btn.querySelector('.check-dot').classList.add('hidden');
-              }
+              if (pos === -1) { state.selectedAnswer.push(idx); btn.classList.add('choice-selected'); btn.querySelector('.check-dot').classList.remove('hidden'); }
+              else { state.selectedAnswer.splice(pos, 1); btn.classList.remove('choice-selected'); btn.querySelector('.check-dot').classList.add('hidden'); }
             }
           });
           grid.appendChild(btn);
         });
         area.appendChild(grid);
-      }
-
-      // 2) SENTENCE BUILDER
-      else if (q.type === 'sentence-builder') {
+      } else if (q.type === 'sentence-builder') {
         const wrapper = document.createElement('div');
         wrapper.className = 'font-en space-y-4';
-        wrapper.innerHTML = `
-          <div id="sb-tray" class="min-h-[64px] p-3.5 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 flex flex-wrap gap-2 items-center">
-            <span id="sb-placeholder" class="text-sm text-slate-400">Tap words below in order...</span>
-          </div>
-          <div id="sb-pool" class="flex flex-wrap gap-2.5 justify-center pt-1"></div>
-        `;
+        wrapper.innerHTML = `<div id="sb-tray" class="min-h-[64px] p-3.5 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 flex flex-wrap gap-2 items-center"></div><div id="sb-pool" class="flex flex-wrap gap-2.5 justify-center pt-1"></div>`;
         area.appendChild(wrapper);
-
-        const tray = $('sb-tray');
-        const pool = $('sb-pool');
-        const pickedIndices = [];
-
-        function redrawSentenceBuilder() {
-          tray.innerHTML = '';
-          if (pickedIndices.length === 0) {
-            tray.innerHTML = '<span class="text-sm text-slate-400">Tap words below in order...</span>';
-          } else {
-            pickedIndices.forEach((wordIdx, orderIdx) => {
-              const chip = document.createElement('button');
-              chip.type = 'button';
-              chip.className = 'animate-tile px-3.5 py-2 rounded-xl bg-blue-600 text-white font-bold text-sm shadow-sm cursor-pointer';
-              chip.textContent = q.words[wordIdx];
-              chip.addEventListener('click', () => {
-                pickedIndices.splice(orderIdx, 1);
-                state.selectedAnswer = pickedIndices.map((i) => q.words[i]);
-                redrawSentenceBuilder();
-              });
-              tray.appendChild(chip);
-            });
-          }
-
+        const tray = $('sb-tray'), pool = $('sb-pool'), picked = [];
+        function redrawSB() {
+          tray.innerHTML = picked.length === 0 ? '<span class="text-sm text-slate-400">Tap words below in order...</span>' : '';
+          picked.forEach((wordIdx, orderIdx) => {
+            const chip = document.createElement('button');
+            chip.type = 'button';
+            chip.className = 'animate-tile px-3.5 py-2 rounded-xl bg-[#FFD100] text-slate-900 font-bold text-sm shadow-sm cursor-pointer';
+            chip.textContent = q.words[wordIdx];
+            chip.addEventListener('click', () => { picked.splice(orderIdx, 1); state.selectedAnswer = picked.map((i) => q.words[i]); redrawSB(); });
+            tray.appendChild(chip);
+          });
           pool.innerHTML = '';
           q.words.forEach((w, wordIdx) => {
-            const used = pickedIndices.includes(wordIdx);
+            const used = picked.includes(wordIdx);
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.disabled = used;
-            btn.className = used
-              ? 'px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-100 text-slate-300 font-bold text-sm'
-              : 'tactile-btn px-4 py-2.5 rounded-xl border-2 border-slate-200 border-b-4 bg-white hover:border-blue-400 text-slate-800 font-bold text-sm cursor-pointer';
+            btn.className = used ? 'px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-100 text-slate-300 font-bold text-sm' : 'tactile-btn px-4 py-2.5 rounded-xl border-2 border-slate-200 border-b-4 bg-white hover:border-blue-400 text-slate-800 font-bold text-sm cursor-pointer';
             btn.textContent = w;
-            btn.addEventListener('click', () => {
-              $('quiz-error').classList.add('hidden');
-              pickedIndices.push(wordIdx);
-              state.selectedAnswer = pickedIndices.map((i) => q.words[i]);
-              redrawSentenceBuilder();
-            });
+            btn.addEventListener('click', () => { $('quiz-error').classList.add('hidden'); picked.push(wordIdx); state.selectedAnswer = picked.map((i) => q.words[i]); redrawSB(); });
             pool.appendChild(btn);
           });
         }
-        redrawSentenceBuilder();
-      }
-
-      // 3) STANDARD MCQ / LISTEN COMPREHENSION
-      else {
+        redrawSB();
+      } else {
         const grid = document.createElement('div');
         grid.className = 'grid grid-cols-1 sm:grid-cols-2 gap-3 font-en';
         const letters = ['A', 'B', 'C', 'D'];
         q.options.forEach((optText, idx) => {
           const btn = document.createElement('button');
           btn.type = 'button';
-          btn.style.animationDelay = `${idx * 45}ms`;
+          btn.style.animationDelay = `${idx * 40}ms`;
           btn.className = 'animate-tile choice-card w-full text-left p-4 rounded-2xl border-2 border-slate-200 bg-white flex items-center gap-3 cursor-pointer';
-          btn.innerHTML = `
-            <span class="choice-badge w-8 h-8 rounded-xl bg-slate-100 text-slate-700 font-extrabold text-sm flex items-center justify-center shrink-0 transition">${letters[idx]}</span>
-            <span class="text-sm sm:text-base font-semibold text-slate-800">${optText}</span>
-          `;
+          btn.innerHTML = `<span class="choice-badge w-8 h-8 rounded-xl bg-slate-100 text-slate-700 font-extrabold text-sm flex items-center justify-center shrink-0 transition">${letters[idx]}</span><span class="text-sm sm:text-base font-semibold text-slate-800">${optText}</span>`;
           btn.addEventListener('click', () => {
             state.selectedAnswer = idx;
             $('quiz-error').classList.add('hidden');
@@ -1046,44 +508,24 @@
         });
         area.appendChild(grid);
       }
-
-      $('btn-next').textContent = num === total ? 'إنهاء وعرض النتيجة ✓' : 'السؤال التالي ←';
+      $('btn-next').textContent = num === TOTAL_QUESTIONS ? 'إنهاء وعرض النتيجة ✓' : 'السؤال التالي ←';
     }
 
     function submitAnswerAndAdvance() {
       const q = state.currentQuestion;
       const errEl = $('quiz-error');
-
-      // Validate input
-      if (q.type === 'multi-select-images' && state.selectedAnswer.length === 0) {
-        errEl.textContent = 'اختر صورة واحدة على الأقل قبل المتابعة.';
-        errEl.classList.remove('hidden');
-        return;
-      }
-      if (q.type === 'sentence-builder' && state.selectedAnswer.length !== q.words.length) {
-        errEl.textContent = 'من فضلك رتب جميع الكلمات لتكوين الجملة كاملة.';
-        errEl.classList.remove('hidden');
-        return;
-      }
-      if ((q.type === 'mcq' || q.type === 'listen-comprehension' || q.type === 'listen-pick-image') && state.selectedAnswer === null) {
-        errEl.textContent = 'من فضلك اختر إجابة قبل الانتقال للسؤال التالي.';
-        errEl.classList.remove('hidden');
-        return;
-      }
-
+      if (q.type === 'multi-select-images' && state.selectedAnswer.length === 0) { errEl.textContent = 'اختر صورة واحدة على الأقل قبل المتابعة.'; errEl.classList.remove('hidden'); return; }
+      if (q.type === 'sentence-builder' && state.selectedAnswer.length !== q.words.length) { errEl.textContent = 'من فضلك رتب جميع الكلمات لتكوين الجملة كاملة.'; errEl.classList.remove('hidden'); return; }
+      if ((q.type === 'mcq' || q.type === 'listen-comprehension' || q.type === 'listen-pick-image') && state.selectedAnswer === null) { errEl.textContent = 'من فضلك اختر إجابة قبل الانتقال للسؤال التالي.'; errEl.classList.remove('hidden'); return; }
       if ('speechSynthesis' in window) window.speechSynthesis.cancel();
 
-      // Evaluate correctness
-      let isCorrect = false;
-      let selectedText = '';
-      let correctText = '';
-
+      let isCorrect = false, selectedText = '', correctText = '';
       if (q.type === 'multi-select-images') {
-        const sortedUser = [...state.selectedAnswer].sort((a, b) => a - b);
-        const sortedAns = [...q.correctIndices].sort((a, b) => a - b);
-        isCorrect = sortedUser.length === sortedAns.length && sortedUser.every((v, i) => v === sortedAns[i]);
-        selectedText = sortedUser.map((i) => q.items[i].label).join(', ');
-        correctText = sortedAns.map((i) => q.items[i].label).join(', ');
+        const su = [...state.selectedAnswer].sort((a, b) => a - b);
+        const sa = [...q.correctIndices].sort((a, b) => a - b);
+        isCorrect = su.length === sa.length && su.every((v, i) => v === sa[i]);
+        selectedText = su.map((i) => q.items[i].label).join(', ');
+        correctText = sa.map((i) => q.items[i].label).join(', ');
       } else if (q.type === 'sentence-builder') {
         selectedText = state.selectedAnswer.join(' ');
         correctText = q.correctSentence;
@@ -1098,64 +540,41 @@
         correctText = q.options[q.correct];
       }
 
-      state.answers.push({
-        id: q.id,
-        level: q.level,
-        skill: q.skill,
-        selected: selectedText,
-        correct: correctText,
-        isCorrect
-      });
-
+      state.answers.push({ id: q.id, level: q.level, skill: q.skill, selected: selectedText, correct: correctText, isCorrect });
       state.skillStats[q.skill].total += 1;
       if (isCorrect) state.skillStats[q.skill].correct += 1;
 
       if (state.mode === 'auto') {
         if (isCorrect) {
           state.streakCorrect += 1;
-          state.abilityIndex = Math.min(5.0, state.abilityIndex + 0.45);
-          if (state.currentTier === 0 || state.streakCorrect >= 2) {
-            state.currentTier = Math.min(4, state.currentTier + 1);
-            state.streakCorrect = 0;
-          }
+          state.abilityIndex = Math.min(5.0, state.abilityIndex + 0.28);
+          if (state.streakCorrect >= 2) { state.currentTier = Math.min(4, state.currentTier + 1); state.streakCorrect = 0; }
         } else {
           state.streakCorrect = 0;
-          state.abilityIndex = Math.max(0.25, state.abilityIndex - 0.30);
+          state.abilityIndex = Math.max(0.2, state.abilityIndex - 0.22);
           state.currentTier = Math.max(0, state.currentTier - 1);
         }
       }
 
       state.questionIndex += 1;
-      if (state.questionIndex < state.totalQuestions) {
-        renderQuestion();
-      } else {
-        finishTest();
-      }
+      if (state.questionIndex < TOTAL_QUESTIONS) renderQuestion();
+      else finishTest();
     }
 
-    // =========================================================================
-    // 8. FINISH, SUB-LEVEL SCORING & GOOGLE SHEETS SYNC
-    // =========================================================================
     function finishTest() {
       const durationSec = Math.max(1, Math.round((Date.now() - state.startTime) / 1000));
       const totalCorrect = state.answers.filter((a) => a.isCorrect).length;
-      const overallScore = Math.round((totalCorrect / state.totalQuestions) * 100);
+      const overallScore = Math.round((totalCorrect / TOTAL_QUESTIONS) * 100);
 
-      let cefrLevel;
-      let subLevel;
-      let levelTitle;
-      let abilityOut;
-
+      let cefrLevel, subNum, subLevel, levelTitle, abilityOut;
       if (state.mode === 'manual') {
         cefrLevel = state.manualLevel;
-        subLevel = computeManualSublevel(cefrLevel, overallScore);
+        ({ subNum, subLevel } = computeManualSublevel(cefrLevel, overallScore));
         levelTitle = `${CEFR_INFO[cefrLevel].title} (${subLevel})`;
         abilityOut = Number((LEVELS.indexOf(cefrLevel) + overallScore / 100).toFixed(2));
         $('res-mode-badge').textContent = `اختبار مستوى مخصص (${cefrLevel})`;
       } else {
-        const res = computeAutoLevelAndSublevel(state.abilityIndex);
-        cefrLevel = res.cefrLevel;
-        subLevel = res.subLevel;
+        ({ cefrLevel, subNum, subLevel } = computeAutoLevelAndSublevel(state.abilityIndex));
         levelTitle = `${CEFR_INFO[cefrLevel].title} (${subLevel})`;
         abilityOut = Number(state.abilityIndex.toFixed(2));
         $('res-mode-badge').textContent = 'اختبار شامل متدرج من A1';
@@ -1170,9 +589,8 @@
 
       showScreen('screen-results');
       $('res-student-heading').textContent = `${state.studentName} (${state.studentAge} سنة)`;
-      $('res-cefr-code').textContent = cefrLevel;
-      $('res-sublevel-badge').textContent = subLevel;
-      $('res-cefr-title').textContent = info.title;
+      $('res-sublevel-big').textContent = `Level ${subNum}`;
+      $('res-cefr-badge').textContent = `${cefrLevel} • ${info.title}`;
       $('res-level-desc').textContent = info.desc;
       $('res-accuracy').textContent = `${overallScore}%`;
       $('res-ability').textContent = `${abilityOut.toFixed(2)} / 5`;
@@ -1186,31 +604,32 @@
       info.recs.forEach((r) => {
         const li = document.createElement('li');
         li.className = 'flex items-start gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200';
-        li.innerHTML = `<span class="text-blue-600 font-bold">✓</span><span>${r}</span>`;
+        li.innerHTML = `<span class="text-[#00A0E9] font-bold">✓</span><span>${r}</span>`;
         recList.appendChild(li);
       });
 
       renderSkillsChart(skillPct);
+      if (typeof confetti === 'function') confetti({ particleCount: 70, spread: 65, origin: { y: 0.6 } });
 
-      if (typeof confetti === 'function') {
-        confetti({ particleCount: 70, spread: 65, origin: { y: 0.6 } });
-      }
-
-      const payload = {
-        name: state.studentName,
-        age: state.studentAge,
-        testMode: state.mode === 'auto' ? 'Auto (from A1)' : `Manual (${state.manualLevel})`,
-        cefrLevel,
-        subLevel,
-        levelTitle,
-        overallScore,
-        abilityIndex: abilityOut,
-        skills: skillPct,
-        durationSec,
-        answers: state.answers
-      };
-      state.lastPayload = payload;
-      syncToGoogleSheets(payload);
+      // Silent background sync to Google Sheets (no banner shown to student)
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          name: state.studentName,
+          age: state.studentAge,
+          testMode: state.mode === 'auto' ? 'Auto (from A1)' : `Manual (${state.manualLevel})`,
+          cefrLevel,
+          subLevel,
+          levelTitle,
+          overallScore,
+          abilityIndex: abilityOut,
+          skills: skillPct,
+          durationSec,
+          answers: state.answers
+        })
+      }).catch(() => {});
     }
 
     function renderSkillsChart(skillPct) {
@@ -1228,72 +647,19 @@
             maxBarThickness: 42
           }]
         },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: { y: { beginAtZero: true, max: 100, ticks: { callback: (v) => v + '%' } } }
-        }
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 100, ticks: { callback: (v) => v + '%' } } } }
       });
     }
 
-    async function syncToGoogleSheets(payload) {
-      const banner = $('sync-banner');
-      const icon = $('sync-icon');
-      const title = $('sync-title');
-      const sub = $('sync-subtitle');
-      const retryBtn = $('btn-retry-sync');
-
-      banner.className = 'animate-slide rounded-2xl p-4 border bg-blue-50 border-blue-200 text-blue-900 flex flex-wrap items-center justify-between gap-3 no-print';
-      icon.className = 'w-8 h-8 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center shrink-0 font-bold';
-      icon.textContent = '...';
-      title.textContent = 'جاري حفظ النتيجة في Google Sheets...';
-      sub.textContent = 'يرجى الانتظار لحظة.';
-      retryBtn.classList.add('hidden');
-
-      try {
-        await fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
-        });
-        banner.className = 'animate-slide rounded-2xl p-4 border bg-emerald-50 border-emerald-200 text-emerald-900 flex flex-wrap items-center justify-between gap-3 no-print';
-        icon.className = 'w-8 h-8 rounded-full bg-emerald-200 text-emerald-800 flex items-center justify-center shrink-0 font-bold';
-        icon.textContent = '✓';
-        title.textContent = 'تم حفظ النتيجة والمستوى الفرعي بنجاح في Google Sheets!';
-        sub.textContent = 'يمكن للمعلم مراجعة نتيجتك وتفاصيل إجاباتك مباشرة.';
-      } catch (err) {
-        banner.className = 'animate-slide rounded-2xl p-4 border bg-rose-50 border-rose-200 text-rose-900 flex flex-wrap items-center justify-between gap-3 no-print';
-        icon.className = 'w-8 h-8 rounded-full bg-rose-200 text-rose-800 flex items-center justify-center shrink-0 font-bold';
-        icon.textContent = '!';
-        title.textContent = 'تعذر الاتصال بـ Google Sheets حالياً';
-        sub.textContent = 'تأكد من اتصالك بالإنترنت واضغط على إعادة المحاولة.';
-        retryBtn.classList.remove('hidden');
-      }
-    }
-
-    // =========================================================================
-    // 9. EVENT LISTENERS
-    // =========================================================================
     $('start-form').addEventListener('submit', (e) => {
       e.preventDefault();
       const name = $('student-name').value.trim();
       const age = parseInt($('student-age').value, 10);
       const errBox = $('form-error');
-
-      if (name.length < 2) {
-        errBox.textContent = 'من فضلك أدخل اسمك الكامل.';
-        errBox.classList.remove('hidden');
-        return;
-      }
-      if (isNaN(age) || age < 6 || age > 99) {
-        errBox.textContent = 'من فضلك أدخل عمراً صحيحاً بين 6 و 99 سنة.';
-        errBox.classList.remove('hidden');
-        return;
-      }
-
+      if (name.length < 2) { errBox.textContent = 'من فضلك أدخل اسمك الكامل.'; errBox.classList.remove('hidden'); return; }
+      if (isNaN(age) || age < 6 || age > 99) { errBox.textContent = 'من فضلك أدخل عمراً صحيحاً بين 6 و 99 سنة.'; errBox.classList.remove('hidden'); return; }
       errBox.classList.add('hidden');
+
       state.studentName = name;
       state.studentAge = age;
       state.startTime = Date.now();
@@ -1303,29 +669,17 @@
       state.abilityIndex = 0.8;
       state.usedIds.clear();
       state.answers = [];
-      state.skillStats = {
-        Vocabulary: { correct: 0, total: 0 },
-        Grammar: { correct: 0, total: 0 },
-        Reading: { correct: 0, total: 0 },
-        Listening: { correct: 0, total: 0 }
-      };
+      state.skillStats = { Vocabulary: { correct: 0, total: 0 }, Grammar: { correct: 0, total: 0 }, Reading: { correct: 0, total: 0 }, Listening: { correct: 0, total: 0 } };
 
       $('header-student-pill').textContent = `${name} • ${age} سنة`;
       $('header-student-pill').classList.remove('hidden');
-
       showScreen('screen-quiz');
       renderQuestion();
     });
 
     $('btn-next').addEventListener('click', submitAnswerAndAdvance);
-    $('btn-retry-sync').addEventListener('click', () => {
-      if (state.lastPayload) syncToGoogleSheets(state.lastPayload);
-    });
     $('btn-print').addEventListener('click', () => window.print());
-    $('btn-retake').addEventListener('click', () => {
-      $('header-student-pill').classList.add('hidden');
-      showScreen('screen-welcome');
-    });
+    $('btn-retake').addEventListener('click', () => { $('header-student-pill').classList.add('hidden'); showScreen('screen-welcome'); });
   </script>
 </body>
 </html>
